@@ -477,7 +477,7 @@ const vi: Content = {
     info: {
       name: "Trần Lý Huỳnh",
       phone: "0968 813 228",
-      email: "contact@ip-foundation.com",
+      email: "huynhtarn@gmail.com",
       website: "IP-foundation.com",
     },
     form: {
@@ -528,7 +528,7 @@ const vi: Content = {
       {
         title: "Liên hệ",
         links: [
-          { label: "contact@ip-foundation.com", href: "mailto:contact@ip-foundation.com" },
+          { label: "huynhtarn@gmail.com", href: "mailto:huynhtarn@gmail.com" },
           { label: "0968 813 228", href: "tel:+84968813228" },
         ],
       },
@@ -848,7 +848,7 @@ const en: Content = {
     info: {
       name: "Trần Lý Huỳnh",
       phone: "0968 813 228",
-      email: "contact@ip-foundation.com",
+      email: "huynhtarn@gmail.com",
       website: "IP-foundation.com",
     },
     form: {
@@ -899,7 +899,7 @@ const en: Content = {
       {
         title: "Contact",
         links: [
-          { label: "contact@ip-foundation.com", href: "mailto:contact@ip-foundation.com" },
+          { label: "huynhtarn@gmail.com", href: "mailto:huynhtarn@gmail.com" },
           { label: "0968 813 228", href: "tel:+84968813228" },
         ],
       },
