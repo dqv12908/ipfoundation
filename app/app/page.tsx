@@ -1,193 +1,166 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { ArrowLeft, Bell, CheckCircle, Globe } from "lucide-react";
-import { useLang } from "@/lib/i18n";
+import { useState, useEffect } from 'react'
+import { CampaignCard } from '@/components/platform/campaign/CampaignCard'
+import { CardSkeleton } from '@/components/platform/shared/Skeleton'
+import { ErrorMessage } from '@/components/platform/shared/ErrorMessage'
+import type { ApiCampaign, PaginatedResponse } from '@/lib/platform/api'
 
-const content = {
-  vi: {
-    home: "Trang chủ",
-    badge: "Đang phát triển",
-    headingLines: ["SẮP", "RA MẮT"],
-    description:
-      "Nền tảng giao dịch & token hóa tài sản trí tuệ đang được xây dựng. Đăng ký để nhận thông báo khi ra mắt.",
-    success: "Cảm ơn! Chúng tôi sẽ thông báo khi ra mắt.",
-    placeholder: "Email của bạn",
-    cta: "Nhận thông báo",
-    features: [
-      { label: "Token hóa IP", desc: "RWA Tokenization" },
-      { label: "Marketplace", desc: "Giao dịch IP" },
-      { label: "Thẩm định AI", desc: "AI Verification" },
-      { label: "Smart Contract", desc: "Hợp đồng thông minh" },
-    ],
-  },
-  en: {
-    home: "Home",
-    badge: "In Development",
-    headingLines: ["COMING", "SOON"],
-    description:
-      "The intellectual property trading & tokenization platform is under development. Sign up to be notified at launch.",
-    success: "Thank you! We'll notify you when we launch.",
-    placeholder: "Your email",
-    cta: "Get Notified",
-    features: [
-      { label: "IP Tokenization", desc: "RWA Tokenization" },
-      { label: "Marketplace", desc: "IP Trading" },
-      { label: "AI Verification", desc: "AI-Powered Review" },
-      { label: "Smart Contract", desc: "Digital Agreements" },
-    ],
-  },
-};
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
 
-export default function ComingSoonPage() {
-  const { locale, toggleLocale } = useLang();
-  const t = content[locale];
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+const filters = [
+  { value: '', label: 'All' },
+  { value: 'APPROVED', label: 'Upcoming' },
+  { value: 'LIVE', label: 'Live' },
+  { value: 'ENDED', label: 'Ended' },
+  { value: 'FINALIZED_SUCCESS', label: 'Successful' },
+  { value: 'FINALIZED_FAIL', label: 'Failed' },
+]
 
-  function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!email.trim()) return;
-    setSubmitted(true);
-    setEmail("");
+export default function ExplorePage() {
+  const [status, setStatus] = useState('')
+  const [campaigns, setCampaigns] = useState<ApiCampaign[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  function fetchCampaigns() {
+    setLoading(true)
+    setError(null)
+    const params = status ? `?status=${status}` : ''
+    fetch(`${API_URL}/api/campaigns${params}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`API returned ${r.status}`)
+        return r.json() as Promise<PaginatedResponse<ApiCampaign>>
+      })
+      .then((data) => setCampaigns(data.items))
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false))
   }
 
+  useEffect(() => {
+    fetchCampaigns()
+  }, [status]) // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <div className="relative min-h-screen bg-black overflow-hidden flex flex-col">
-      {/* Background effects */}
-      <div className="absolute inset-0 bg-grid opacity-30 pointer-events-none" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[800px] bg-glow-blue-strong pointer-events-none" />
-      <div className="absolute inset-0 bg-glow-top pointer-events-none" />
-
-      {/* Top bar */}
-      <header className="relative z-10 flex items-center justify-between px-6 sm:px-10 py-6">
-        <Link
-          href="/"
-          className="inline-flex items-center gap-2 text-white/60 hover:text-white text-sm font-medium transition-colors"
+    <div>
+      {/* Hero */}
+      <div className="mb-12 pt-10 animate-fade-in">
+        <p className="label-caps mb-3 tracking-widest text-accent">Tokenized IP Fundraising</p>
+        <h1
+          className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]"
+          style={{ fontFamily: 'var(--font-display)' }}
         >
-          <ArrowLeft size={16} />
-          {t.home}
-        </Link>
+          Invest in Ideas,<br />
+          <span className="accent-text">Before the World Does.</span>
+        </h1>
+        <p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-text-secondary">
+          Commit capital to IP-backed campaigns. Smart contract escrow.
+          Binary outcomes. Fully non-custodial.
+        </p>
 
-        <div className="flex items-center gap-4">
+        {/* Stats row */}
+        <div className="mt-8 flex items-center gap-6">
+          <div>
+            <p
+              className="text-2xl font-bold tabular-nums"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              {campaigns.length}
+            </p>
+            <p className="text-xs text-text-muted">Campaigns</p>
+          </div>
+          <div className="h-6 w-px bg-border" />
+          <div>
+            <p
+              className="text-2xl font-bold text-accent"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              100%
+            </p>
+            <p className="text-xs text-text-muted">On-Chain</p>
+          </div>
+          <div className="h-6 w-px bg-border" />
+          <div>
+            <p
+              className="text-2xl font-bold text-text-secondary"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Sepolia
+            </p>
+            <p className="text-xs text-text-muted">Testnet</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter pills */}
+      <div className="mb-8 flex flex-wrap items-center gap-1.5 animate-slide-up stagger-2">
+        {filters.map((f) => (
           <button
-            onClick={toggleLocale}
-            className="flex items-center gap-1.5 text-white/50 hover:text-white text-xs font-heading font-medium uppercase tracking-wider transition-colors"
+            key={f.value}
+            onClick={() => setStatus(f.value)}
+            className={`rounded-md px-3 py-1.5 text-[0.8125rem] font-medium transition-all duration-150 ${
+              status === f.value
+                ? 'bg-accent/12 text-accent'
+                : 'text-text-secondary hover:text-text-primary hover:bg-white/[0.04]'
+            }`}
           >
-            <Globe size={14} />
-            {locale === "vi" ? "EN" : "VI"}
+            {f.label}
           </button>
-          <span className="font-heading font-black text-lg text-white tracking-tight flex items-center gap-1.5">
-            <span className="inline-flex items-center justify-center w-8 h-8 text-sm font-black bg-white/10">
-              IP
-            </span>
-            <span className="hidden sm:inline">FOUNDATION</span>
-          </span>
+        ))}
+      </div>
+
+      {/* Content */}
+      {error ? (
+        <ErrorMessage message={error} retry={fetchCampaigns} />
+      ) : loading ? (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CardSkeleton key={i} />
+          ))}
         </div>
-      </header>
-
-      {/* Main content */}
-      <main className="relative z-10 flex-1 flex items-center justify-center px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Status badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 border border-accent-blue/30 bg-accent-blue/5 px-4 py-2 mb-10"
-          >
-            <motion.div
-              animate={{ opacity: [1, 0.3, 1] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="w-2 h-2 bg-accent-blue"
-            />
-            <span className="text-accent-blue text-xs font-heading font-medium uppercase tracking-widest">
-              {t.badge}
-            </span>
-          </motion.div>
-
-          {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="font-heading text-[3rem] sm:text-[5rem] md:text-[7rem] font-black text-white leading-[0.95] tracking-tighter mb-6 py-[0.1em]"
-          >
-            {t.headingLines.map((line, i) => (
-              <span key={i}>
-                {i > 0 && <br />}
-                {line}
-              </span>
-            ))}
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25 }}
-            className="text-white/50 text-lg sm:text-xl max-w-xl mx-auto mb-12 leading-relaxed"
-          >
-            {t.description}
-          </motion.p>
-
-          {/* Email signup */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.45 }}
-          >
-            {submitted ? (
-              <div className="inline-flex items-center gap-3 border border-green-500/30 bg-green-500/5 px-6 py-4">
-                <CheckCircle size={20} className="text-green-400" />
-                <span className="text-green-400 text-sm font-medium">
-                  {t.success}
-                </span>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-                <div className="flex-1 relative">
-                  <input
-                    type="email"
-                    placeholder={t.placeholder}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="w-full bg-transparent border border-white/10 px-4 py-3 text-white placeholder:text-white/25 focus:outline-none focus:border-accent-blue transition-colors text-sm"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="flex items-center justify-center gap-2 bg-accent-blue text-white px-6 py-3 font-heading font-medium text-sm hover:bg-white hover:text-accent-blue transition-all duration-300 active:scale-95"
-                >
-                  <Bell size={14} />
-                  {t.cta}
-                </button>
-              </form>
-            )}
-          </motion.div>
+      ) : campaigns.length === 0 ? (
+        <div className="flex flex-col items-center py-20 text-center animate-fade-in">
+          <svg className="mb-3 h-8 w-8 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <p className="text-sm font-medium text-text-secondary">No campaigns found</p>
+          <p className="mt-1 text-xs text-text-muted">
+            {status ? 'Try a different filter' : 'Check back soon for new launches'}
+          </p>
         </div>
-      </main>
+      ) : (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {campaigns.map((c, i) => (
+            <CampaignCard key={c.onChainId} campaign={c} index={i} />
+          ))}
+        </div>
+      )}
 
-      {/* Feature preview strip */}
-      <motion.footer
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="relative z-10 border-t border-white/[0.06] py-8 px-6"
-      >
-        <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-          {t.features.map((feature) => (
-            <div key={feature.label}>
-              <div className="text-white text-sm font-heading font-bold mb-1">
-                {feature.label}
-              </div>
-              <div className="text-white/25 text-xs">{feature.desc}</div>
+      {/* How it works */}
+      <div className="mt-20 animate-slide-up">
+        <p className="label-caps mb-6 tracking-widest">The Protocol</p>
+        <div className="grid gap-5 sm:grid-cols-3">
+          {[
+            { num: '01', title: 'Create', desc: 'Companies submit IP-backed campaigns with clear fundraising parameters and timeline.' },
+            { num: '02', title: 'Fund', desc: 'Commit ETH during the live window. All capital secured by smart contract escrow.' },
+            { num: '03', title: 'Settle', desc: 'Min raise met — tokens distributed. Not met — full refund. Binary outcome, no ambiguity.' },
+          ].map((step, i) => (
+            <div
+              key={step.num}
+              className={`panel p-6 animate-slide-up stagger-${i + 1}`}
+            >
+              <span className="text-xs font-semibold text-accent tabular-nums">{step.num}</span>
+              <h3
+                className="mt-2 text-base font-bold"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{step.desc}</p>
             </div>
           ))}
         </div>
-      </motion.footer>
+      </div>
     </div>
-  );
+  )
 }

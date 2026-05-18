@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import Providers from "@/components/Providers";
 import "./globals.css";
+import "./platform-globals.css";
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
