@@ -5,6 +5,7 @@ import { parseEther } from 'viem'
 import { useAccount, useWriteContract, useWaitForTransactionReceipt } from 'wagmi'
 import { useRouter } from 'next/navigation'
 import { campaignFactoryAbi } from '@/lib/platform/generated'
+import { PLATFORM_FACTORY_ADDRESS } from '@/lib/platform/config'
 import dynamic from 'next/dynamic'
 import { TransactionButton } from '@/components/platform/shared/TransactionButton'
 import { ConnectWalletPrompt } from '@/components/platform/shared/ConnectWalletPrompt'
@@ -16,8 +17,6 @@ const RichTextEditor = dynamic(
   () => import('@/components/platform/ui/RichTextEditor').then((m) => m.RichTextEditor),
   { ssr: false, loading: () => <div className="h-[320px] rounded-xl border border-border bg-white/[0.015] shimmer" /> },
 )
-
-const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as `0x${string}` | undefined
 
 interface UploadedFile {
   name: string
@@ -96,17 +95,13 @@ export default function NewCampaignPage() {
   }
 
   function handleSubmit() {
-    if (!FACTORY_ADDRESS) {
-      alert('Factory address not configured')
-      return
-    }
     const startTimestamp = Math.floor(new Date(`${form.startDate}T${form.startTime}`).getTime() / 1000)
     const endTimestamp = Math.floor(new Date(`${form.endDate}T${form.endTime}`).getTime() / 1000)
 
     // In production: upload images/files to IPFS, build metadata JSON, upload that, get CID → metadataURI
     // For MVP: metadataURI is optional and metadata is stored locally
     writeContract({
-      address: FACTORY_ADDRESS,
+      address: PLATFORM_FACTORY_ADDRESS,
       abi: campaignFactoryAbi,
       functionName: 'createCampaign',
       args: [
@@ -587,10 +582,6 @@ export default function NewCampaignPage() {
                 Your campaign will be submitted for admin review. Once approved, it goes live on the scheduled start date.
               </p>
 
-              {!FACTORY_ADDRESS && (
-                <p className="mt-3 text-xs text-caution">Factory address not configured. Set NEXT_PUBLIC_FACTORY_ADDRESS.</p>
-              )}
-
               {!isConnected ? (
                 <div className="mt-5 w-full max-w-sm">
                   <ConnectWalletPrompt message="Connect your company wallet to submit the campaign on-chain." />
@@ -609,7 +600,7 @@ export default function NewCampaignPage() {
                   <TransactionButton
                     hash={hash}
                     isPending={isPending}
-                    disabled={!isValid || !FACTORY_ADDRESS}
+                    disabled={!isValid}
                     onClick={handleSubmit}
                   >
                     Create Campaign

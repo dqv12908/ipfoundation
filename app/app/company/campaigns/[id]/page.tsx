@@ -12,7 +12,7 @@ import { useCompanyAuth } from '@/lib/platform/company-auth'
 import { formatRaise, formatDate, campaignProgress } from '@/lib/platform/format'
 import type { ApiCampaign, ApiPost } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 export default function CompanyCampaignPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)

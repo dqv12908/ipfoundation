@@ -6,7 +6,7 @@ import { CardSkeleton } from '@/components/platform/shared/Skeleton'
 import { ErrorMessage } from '@/components/platform/shared/ErrorMessage'
 import type { ApiCampaign, PaginatedResponse } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 const filters = [
   { value: '', label: 'All' },

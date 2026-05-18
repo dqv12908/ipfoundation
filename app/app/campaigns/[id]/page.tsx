@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { CampaignDetail } from '@/components/platform/campaign/CampaignDetail'
 import type { ApiCampaign } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 export default function CampaignDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = use(params)

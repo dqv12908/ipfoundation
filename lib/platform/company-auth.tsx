@@ -10,7 +10,7 @@ import {
 } from 'react'
 import type { ApiCompanyAccount } from './api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 interface CompanyAuthState {
   company: ApiCompanyAccount | null

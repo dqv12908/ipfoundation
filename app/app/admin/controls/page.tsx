@@ -2,29 +2,18 @@
 
 import { useReadContract, useWriteContract } from 'wagmi'
 import { campaignFactoryAbi } from '@/lib/platform/generated'
+import { PLATFORM_FACTORY_ADDRESS } from '@/lib/platform/config'
 import { TransactionButton } from '@/components/platform/shared/TransactionButton'
-
-const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as `0x${string}` | undefined
 
 export default function AdminControlsPage() {
   const { data: paused } = useReadContract({
-    address: FACTORY_ADDRESS,
+    address: PLATFORM_FACTORY_ADDRESS,
     abi: campaignFactoryAbi,
     functionName: 'paused',
-    query: { enabled: !!FACTORY_ADDRESS },
   })
 
   const { data: pauseHash, isPending: pausePending, writeContract: writePause } = useWriteContract()
   const { data: unpauseHash, isPending: unpausePending, writeContract: writeUnpause } = useWriteContract()
-
-  if (!FACTORY_ADDRESS) {
-    return (
-      <div className="py-20 text-center">
-        <h1 className="mb-2 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>Emergency Controls</h1>
-        <p className="text-sm text-text-muted">Factory address not configured.</p>
-      </div>
-    )
-  }
 
   return (
     <div className="mx-auto max-w-xl animate-fade-in">
@@ -53,7 +42,7 @@ export default function AdminControlsPage() {
               variant="danger"
               onClick={() =>
                 writePause({
-                  address: FACTORY_ADDRESS,
+                  address: PLATFORM_FACTORY_ADDRESS,
                   abi: campaignFactoryAbi,
                   functionName: 'pause',
                 })
@@ -74,7 +63,7 @@ export default function AdminControlsPage() {
               isPending={unpausePending}
               onClick={() =>
                 writeUnpause({
-                  address: FACTORY_ADDRESS,
+                  address: PLATFORM_FACTORY_ADDRESS,
                   abi: campaignFactoryAbi,
                   functionName: 'unpause',
                 })

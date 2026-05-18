@@ -3,25 +3,22 @@
 import { useAccount, useReadContract } from 'wagmi'
 import Link from 'next/link'
 import { campaignFactoryAbi } from '@/lib/platform/generated'
+import { PLATFORM_FACTORY_ADDRESS } from '@/lib/platform/config'
 import { ConnectWalletPrompt } from '@/components/platform/shared/ConnectWalletPrompt'
-
-const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as `0x${string}` | undefined
 
 export default function AdminPage() {
   const { isConnected } = useAccount()
 
   const { data: campaignCount } = useReadContract({
-    address: FACTORY_ADDRESS,
+    address: PLATFORM_FACTORY_ADDRESS,
     abi: campaignFactoryAbi,
     functionName: 'campaignCount',
-    query: { enabled: !!FACTORY_ADDRESS },
   })
 
   const { data: paused } = useReadContract({
-    address: FACTORY_ADDRESS,
+    address: PLATFORM_FACTORY_ADDRESS,
     abi: campaignFactoryAbi,
     functionName: 'paused',
-    query: { enabled: !!FACTORY_ADDRESS },
   })
 
   if (!isConnected) {

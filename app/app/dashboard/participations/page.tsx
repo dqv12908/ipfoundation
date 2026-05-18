@@ -8,7 +8,7 @@ import { ConnectWalletPrompt } from '@/components/platform/shared/ConnectWalletP
 import { formatRaise, formatDate } from '@/lib/platform/format'
 import type { ApiCommitment } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 export default function ParticipationsPage() {
   const { address, isConnected } = useAccount()

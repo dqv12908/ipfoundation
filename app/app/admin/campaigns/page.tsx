@@ -6,7 +6,7 @@ import { StatusBadge } from '@/components/platform/shared/StatusBadge'
 import { formatRaise, formatDate, shortAddress } from '@/lib/platform/format'
 import type { ApiCampaign, PaginatedResponse } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 export default function AdminCampaignsPage() {
   const [campaigns, setCampaigns] = useState<ApiCampaign[]>([])

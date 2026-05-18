@@ -7,7 +7,7 @@ import { AllocationDisplay } from '@/components/platform/campaign/AllocationDisp
 import { ConnectWalletPrompt } from '@/components/platform/shared/ConnectWalletPrompt'
 import type { ApiCommitment } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 export default function ClaimsPage() {
   const { address, isConnected } = useAccount()

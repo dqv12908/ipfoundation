@@ -7,7 +7,7 @@ import { ConnectWalletPrompt } from '@/components/platform/shared/ConnectWalletP
 import { ErrorMessage } from '@/components/platform/shared/ErrorMessage'
 import type { ApiPost, ApiFollow, PaginatedResponse } from '@/lib/platform/api'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 type Tab = 'global' | 'invested' | 'following'
 

@@ -15,7 +15,6 @@ const statusMap: Record<number, string> = {
   2: 'REJECTED',
   3: 'LIVE',
   4: 'ENDED',
-  5: 'FINALIZED_SUCCESS',
 }
 
 export function CampaignDetail({ campaign }: { campaign: ApiCampaign }) {
@@ -36,7 +35,13 @@ export function CampaignDetail({ campaign }: { campaign: ApiCampaign }) {
 
   const liveTotal = totalCommitted ? totalCommitted.toString() : campaign.totalCommitted
   const liveStatus =
-    onChainStatus !== undefined ? statusMap[Number(onChainStatus)] ?? campaign.status : campaign.status
+    onChainStatus !== undefined
+      ? Number(onChainStatus) === 5
+        ? campaign.successful
+          ? 'FINALIZED_SUCCESS'
+          : 'FINALIZED_FAIL'
+        : statusMap[Number(onChainStatus)] ?? campaign.status
+      : campaign.status
   const progress = campaignProgress(liveTotal, campaign.maxRaise)
   const isETH = campaign.acceptedAsset === '0x0000000000000000000000000000000000000000'
 
