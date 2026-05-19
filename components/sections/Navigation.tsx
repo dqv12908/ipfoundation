@@ -5,30 +5,14 @@ import { useRouter } from "next/navigation";
 import { Menu, X, Globe } from "lucide-react";
 import Image from "next/image";
 import { useLang } from "@/lib/i18n";
+import { getContent } from "@/lib/constants";
 import SharpButton from "@/components/ui/GlowButton";
 import { cn } from "@/lib/utils";
-
-const navCopy = {
-  vi: {
-    links: [
-      { label: "Sứ mệnh", href: "#giai-phap" },
-      { label: "Hình ảnh", href: "#doi-tac" },
-    ],
-    cta: "Launchpad",
-  },
-  en: {
-    links: [
-      { label: "Mission", href: "#giai-phap" },
-      { label: "Gallery", href: "#doi-tac" },
-    ],
-    cta: "Launchpad",
-  },
-};
 
 export default function Navigation() {
   const router = useRouter();
   const { locale, toggleLocale } = useLang();
-  const NAV = navCopy[locale];
+  const NAV = getContent(locale).NAV;
 
   const [scrolled, setScrolled] = useState(false);
   const [onLight, setOnLight] = useState(false);
