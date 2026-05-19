@@ -1,86 +1,91 @@
-﻿"use client";
+"use client";
 
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useLang } from "@/lib/i18n";
-import { getContent } from "@/lib/constants";
 import SharpButton from "@/components/ui/GlowButton";
 import { FadeInUp, TextReveal } from "@/components/ui/MotionWrappers";
+
+const copy = {
+  vi: {
+    eyebrow: "IP Foundation",
+    title: "Ý tưởng Việt. Vốn toàn cầu.",
+    body: "Launchpad cho sáng chế, nghiên cứu và tài sản trí tuệ có khả năng thương mại hóa.",
+    primary: "Mở Launchpad",
+    secondary: "Đưa IP lên nền tảng",
+  },
+  en: {
+    eyebrow: "IP Foundation",
+    title: "Vietnamese ideas. Global capital.",
+    body: "A launchpad for inventions, research, and commercially ready intellectual property.",
+    primary: "Open Launchpad",
+    secondary: "Submit IP",
+  },
+};
 
 export default function HeroSection() {
   const router = useRouter();
   const { locale } = useLang();
-  const HERO = getContent(locale).HERO;
+  const hero = copy[locale];
 
   return (
     <section
       id="gioi-thieu"
-      className="relative min-h-screen overflow-hidden bg-black pt-28 sm:pt-32 pb-10"
+      className="relative min-h-screen overflow-hidden bg-black text-white"
     >
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute inset-0 bg-grid opacity-50" />
-        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-accent-blue/[0.08] to-transparent" />
-        <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+      <div className="absolute inset-0">
+        <Image
+          src="/images/hero-bg.jpg"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[28%_center]"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.74)_0%,rgba(0,0,0,0.28)_38%,rgba(0,0,0,0.68)_100%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_34%,rgba(37,99,235,0.18),transparent_34%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/55 to-transparent" />
       </div>
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="mb-10 border-b border-white/10 pb-6">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-16 pt-32 sm:px-8 lg:justify-end">
+        <div className="w-full max-w-3xl lg:ml-auto">
           <FadeInUp>
-            <p className="font-heading text-xs font-medium uppercase tracking-[0.28em] text-accent-blue">
-              {HERO.tagline}
+            <p className="font-heading text-xs font-semibold uppercase tracking-[0.42em] text-white/55">
+              {hero.eyebrow}
             </p>
           </FadeInUp>
-        </div>
 
-        <div className="grid gap-10 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-8 min-w-0">
+          <div className="mt-8">
             <TextReveal>
-              <h1 className="font-heading text-[3rem] sm:text-[5rem] md:text-[7rem] lg:text-[6.25rem] xl:text-[7.4rem] font-black text-white leading-[0.92] tracking-tighter py-[0.1em]">
-                {HERO.heroLines.map((line, i) => (
-                  <span key={i}>
-                    {i > 0 && <br />}
-                    {line.outline ? (
-                      <span className="text-outline">{line.text}</span>
-                    ) : (
-                      line.text
-                    )}
-                  </span>
-                ))}
+              <h1 className="font-heading text-5xl font-black leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
+                {hero.title}
               </h1>
             </TextReveal>
           </div>
 
-          <div className="lg:col-span-4 space-y-6 pb-4 lg:border-l lg:border-white/10 lg:pl-8">
-            <FadeInUp delay={0.4}>
-              <p className="font-heading text-lg text-white font-medium leading-snug">
-                {HERO.subheading}
-              </p>
-            </FadeInUp>
+          <FadeInUp delay={0.18}>
+            <p className="mt-7 max-w-xl text-lg leading-8 text-white/72 md:text-xl">
+              {hero.body}
+            </p>
+          </FadeInUp>
 
-            <FadeInUp delay={0.5}>
-              <p className="text-text-secondary text-sm leading-relaxed">
-                {HERO.description}
-              </p>
-            </FadeInUp>
-
-            <FadeInUp delay={0.6}>
-              <div className="flex flex-wrap gap-3 pt-2">
-                <SharpButton
-                  variant="primary"
-                  onClick={() => router.push("/launchpad")}
-                >
-                  {HERO.ctaPrimary}
-                </SharpButton>
-                <SharpButton
-                  variant="outline"
-                  onClick={() => router.push("/launchpad")}
-                >
-                  {HERO.ctaSecondary}
-                </SharpButton>
-              </div>
-            </FadeInUp>
-          </div>
+          <FadeInUp delay={0.26}>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <SharpButton
+                variant="primary"
+                onClick={() => router.push("/launchpad")}
+              >
+                {hero.primary}
+              </SharpButton>
+              <SharpButton
+                variant="outline"
+                onClick={() => router.push("/launchpad/company")}
+              >
+                {hero.secondary}
+              </SharpButton>
+            </div>
+          </FadeInUp>
         </div>
-
       </div>
     </section>
   );
