@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { getContent } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -11,128 +11,180 @@ import { cn } from "@/lib/utils";
 export default function SolutionSection() {
   const { locale } = useLang();
   const SOLUTION = getContent(locale).SOLUTION;
+  const sectionRef = useRef<HTMLElement | null>(null);
   const [activeIndex, setActiveIndex] = useState(0);
-  const pillarRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [pinMode, setPinMode] = useState<"before" | "active" | "after">(
+    "before"
+  );
 
   useEffect(() => {
-    const observers: IntersectionObserver[] = [];
+    const update = () => {
+      const section = sectionRef.current;
+      if (!section) return;
 
-    pillarRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => {
-          if (entry.isIntersecting) setActiveIndex(i);
-        },
-        {
-          // Collapse the viewport to a narrow horizontal band in the upper-middle.
-          // Any pillar crossing this band becomes "active" — reliable scroll-spy.
-          rootMargin: "-30% 0px -60% 0px",
-          threshold: 0,
-        }
+      const rect = section.getBoundingClientRect();
+      const scrollable = rect.height - window.innerHeight;
+      if (rect.top > 0) {
+        setPinMode("before");
+      } else if (rect.bottom <= window.innerHeight) {
+        setPinMode("after");
+      } else {
+        setPinMode("active");
+      }
+
+      if (scrollable <= 0) {
+        setActiveIndex(0);
+        return;
+      }
+
+      const progress = Math.min(1, Math.max(0, -rect.top / scrollable));
+      const next = Math.min(
+        SOLUTION.pillars.length - 1,
+        Math.floor(progress * SOLUTION.pillars.length)
       );
-      obs.observe(el);
-      observers.push(obs);
-    });
+      setActiveIndex(next);
+    };
 
-    return () => observers.forEach((obs) => obs.disconnect());
-  }, [locale]);
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, [SOLUTION.pillars.length, locale]);
+
+  const scrollToPillar = useCallback(
+    (index: number) => {
+      const section = sectionRef.current;
+      if (!section) return;
+
+      const top = section.getBoundingClientRect().top + window.scrollY;
+      const scrollable = section.offsetHeight - window.innerHeight;
+      const denominator = Math.max(1, SOLUTION.pillars.length - 1);
+      window.scrollTo({
+        top: top + scrollable * (index / denominator),
+        behavior: "smooth",
+      });
+    },
+    [SOLUTION.pillars.length]
+  );
+
+  const activePillar = SOLUTION.pillars[activeIndex] || SOLUTION.pillars[0];
 
   return (
-    <section id="giai-phap" className="relative bg-black py-20 md:py-28">
-      {/* Top edge light bleed from white section above */}
+    <section
+      ref={sectionRef}
+      id="giai-phap"
+      className="relative overflow-visible bg-black py-20 md:py-28 lg:h-[420vh] lg:py-0"
+    >
       <div className="absolute inset-0 bg-glow-top pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:hidden lg:px-8">
         <SectionTitle
           title={SOLUTION.sectionTitle}
           subtitle={SOLUTION.sectionSubtitle}
           align="left"
         />
 
-        <div className="lg:grid lg:grid-cols-12 lg:gap-12">
-          {/* Left: scrollable pillars */}
-          <div className="lg:col-span-6 relative">
-            {/* Vertical progress connector */}
-            <div className="absolute left-[19px] top-0 bottom-0 w-px bg-white/[0.06] hidden lg:block" />
+        <div className="space-y-12">
+          {SOLUTION.pillars.map((pillar, i) => (
+            <FadeInUp key={pillar.title} delay={i * 0.05}>
+              <div className="border border-white/10 bg-white/[0.03] p-6">
+                <span className="mb-4 block font-heading text-4xl font-black text-outline leading-none">
+                  0{i + 1}
+                </span>
+                <p className="mb-2 font-heading text-xs font-medium uppercase tracking-widest text-accent-blue">
+                  {pillar.subtitle}
+                </p>
+                <h3 className="mb-3 font-heading text-2xl font-black text-white">
+                  {pillar.title}
+                </h3>
+                <p className="mb-4 leading-relaxed text-text-secondary">
+                  {pillar.description}
+                </p>
+                <ul className="space-y-2">
+                  {pillar.features.map((feature) => (
+                    <li key={feature} className="flex items-center gap-2.5 text-sm text-white">
+                      <span className="h-1.5 w-1.5 flex-shrink-0 bg-accent-blue" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </FadeInUp>
+          ))}
+        </div>
+      </div>
 
-            <div className="space-y-16 lg:space-y-32">
-              {SOLUTION.pillars.map((pillar, i) => {
-                const isActive = activeIndex === i;
+      <div
+        className={cn(
+          "relative hidden lg:flex lg:min-h-screen lg:items-center lg:overflow-hidden",
+          pinMode === "before" &&
+            "lg:absolute lg:left-0 lg:right-0 lg:top-0",
+          pinMode === "active" &&
+            "lg:fixed lg:inset-x-0 lg:top-0 lg:z-20",
+          pinMode === "after" &&
+            "lg:absolute lg:bottom-0 lg:left-0 lg:right-0"
+        )}
+      >
+        <div className="mx-auto w-full max-w-7xl px-8">
+          <SectionTitle
+            title={SOLUTION.sectionTitle}
+            subtitle={SOLUTION.sectionSubtitle}
+            align="left"
+            className="mb-10"
+          />
 
-                return (
-                  <div
-                    key={pillar.title}
-                    ref={(el) => {
-                      pillarRefs.current[i] = el;
-                    }}
-                  >
-                    <FadeInUp delay={i * 0.05}>
-                      <div className="flex gap-5">
-                        {/* Step indicator */}
-                        <div className="flex-shrink-0 hidden lg:flex flex-col items-center">
-                          <div
-                            className={cn(
-                              "w-10 h-10 border flex items-center justify-center font-heading font-black text-sm relative z-10 transition-colors duration-400",
-                              isActive
-                                ? "bg-accent-blue border-accent-blue"
-                                : "bg-transparent border-white/15"
-                            )}
-                          >
-                            <span
-                              className={cn(
-                                "transition-colors duration-400",
-                                isActive ? "text-white" : "text-white/30"
-                              )}
-                            >
-                              0{i + 1}
-                            </span>
-                          </div>
-                        </div>
+          <div className="grid items-center gap-14 lg:grid-cols-12">
+            <div className="lg:col-span-6">
+              <div className="mb-8 flex gap-3">
+                {SOLUTION.pillars.map((pillar, i) => {
+                  const isActive = activeIndex === i;
 
-                        {/* Content */}
-                        <div
-                          className={cn(
-                            "transition-opacity duration-500",
-                            isActive ? "opacity-100" : "lg:opacity-40"
-                          )}
-                        >
-                          {/* Mobile number */}
-                          <span className="lg:hidden font-heading text-4xl font-black text-outline leading-none block mb-3">
-                            0{i + 1}
-                          </span>
+                  return (
+                    <button
+                      key={pillar.title}
+                      type="button"
+                      onClick={() => scrollToPillar(i)}
+                      className={cn(
+                        "h-1 flex-1 transition-colors duration-300",
+                        isActive ? "bg-accent-blue" : "bg-white/12 hover:bg-white/30"
+                      )}
+                      aria-label={pillar.title}
+                    />
+                  );
+                })}
+              </div>
 
-                          <p className="text-accent-blue text-xs font-heading font-medium uppercase tracking-widest mb-2">
-                            {pillar.subtitle}
-                          </p>
-                          <h3 className="font-heading text-2xl md:text-3xl font-black text-white mb-3">
-                            {pillar.title}
-                          </h3>
-                          <p className="text-text-secondary leading-relaxed mb-4 max-w-lg">
-                            {pillar.description}
-                          </p>
-                          <ul className="space-y-2">
-                            {pillar.features.map((f) => (
-                              <li
-                                key={f}
-                                className="flex items-center gap-2.5 text-white text-sm"
-                              >
-                                <span className="w-1.5 h-1.5 bg-accent-blue flex-shrink-0" />
-                                {f}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </FadeInUp>
-                  </div>
-                );
-              })}
+              <div key={activePillar.title} className="tab-panel-enter">
+                <p className="mb-6 font-heading text-sm font-semibold uppercase tracking-[0.28em] text-white/35">
+                  0{activeIndex + 1} / 04
+                </p>
+                <p className="mb-3 font-heading text-xs font-medium uppercase tracking-widest text-accent-blue">
+                  {activePillar.subtitle}
+                </p>
+                <h3 className="max-w-xl font-heading text-5xl font-black leading-[0.96] tracking-tight text-white">
+                  {activePillar.title}
+                </h3>
+                <p className="mt-6 max-w-xl text-lg leading-8 text-text-secondary">
+                  {activePillar.description}
+                </p>
+                <ul className="mt-8 grid max-w-xl gap-3 sm:grid-cols-2">
+                  {activePillar.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-medium text-white/82"
+                    >
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
 
-          {/* Right: sticky 3D iPad demo (desktop only) */}
-          <div className="hidden lg:flex lg:col-span-6 items-start justify-center">
-            <div className="sticky top-28">
+            <div className="flex justify-center lg:col-span-6">
               <IPadDemo activeScreen={activeIndex} />
             </div>
           </div>
