@@ -41,7 +41,6 @@ export default function ProblemSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionTitle
           title={PROBLEM.sectionTitle}
-          subtitle={PROBLEM.sectionSubtitle}
           light
         />
 

@@ -17,30 +17,6 @@ const filters = [
   { value: 'FINALIZED_FAIL', label: 'Thất bại' },
 ]
 
-const protocolChecks = [
-  { label: 'Escrow', value: 'Không lưu ký', detail: 'Vốn khóa bằng hợp đồng' },
-  { label: 'Kết quả', value: 'Nhị phân', detail: 'Đạt mốc hoặc hoàn tiền' },
-  { label: 'Mạng', value: 'Sepolia', detail: 'Môi trường thử nghiệm' },
-]
-
-const protocolSteps = [
-  {
-    num: '01',
-    title: 'Tạo chiến dịch',
-    desc: 'Doanh nghiệp gửi chiến dịch IP với mục tiêu vốn, giá token và lịch gọi vốn rõ ràng.',
-  },
-  {
-    num: '02',
-    title: 'Góp vốn',
-    desc: 'Nhà đầu tư cam kết ETH trong thời gian mở bán. Toàn bộ vốn được giữ trong escrow on-chain.',
-  },
-  {
-    num: '03',
-    title: 'Quyết toán',
-    desc: 'Đạt mức tối thiểu thì phân phối token. Không đạt thì hoàn tiền đầy đủ.',
-  },
-]
-
 export default function ExplorePage() {
   const [status, setStatus] = useState('')
   const [campaigns, setCampaigns] = useState<ApiCampaign[]>([])
@@ -71,51 +47,25 @@ export default function ExplorePage() {
   return (
     <div className="space-y-10">
       <section className="relative overflow-hidden border-b border-border pb-10 pt-8 animate-fade-in">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_22rem] lg:items-end">
-          <div>
-            <p className="label-caps mb-4 tracking-widest text-accent">Huy động vốn IP mã hóa</p>
-            <h1
-              className="max-w-5xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl lg:leading-[1.05]"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              Đầu tư vào ý tưởng,{' '}
-              <span className="accent-text">trước khi thế giới nhận ra.</span>
-            </h1>
-            <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-text-secondary">
-              Cam kết vốn vào các chiến dịch được bảo chứng bằng tài sản trí tuệ. Vốn được
-              khóa bằng hợp đồng thông minh, kết quả nhị phân, hoàn toàn không lưu ký.
-            </p>
-          </div>
-
-          <div className="panel-elevated overflow-hidden">
-            <div className="border-b border-border px-5 py-4">
-              <p className="label-caps text-accent">Bảng kiểm giao thức</p>
-            </div>
-            <div className="divide-y divide-white/[0.04]">
-              {protocolChecks.map((item) => (
-                <div key={item.label} className="flex items-center justify-between gap-4 px-5 py-4">
-                  <div>
-                    <p className="text-xs text-text-muted">{item.label}</p>
-                    <p className="mt-1 text-sm text-text-secondary">{item.detail}</p>
-                  </div>
-                  <p
-                    className="text-right text-sm font-bold text-text-primary"
-                    style={{ fontFamily: 'var(--font-display)' }}
-                  >
-                    {item.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
+        <div>
+          <p className="label-caps mb-4 tracking-widest text-accent">Huy động vốn IP mã hóa</p>
+          <h1
+            className="max-w-5xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl lg:leading-[1.05]"
+            style={{ fontFamily: 'var(--font-display)' }}
+          >
+            Đầu tư vào ý tưởng,{' '}
+            <span className="accent-text">trước khi thế giới nhận ra.</span>
+          </h1>
+          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-text-secondary">
+            Cam kết vốn vào các chiến dịch được bảo chứng bằng tài sản trí tuệ.
+          </p>
         </div>
       </section>
 
-      <section className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3 animate-slide-up">
+      <section className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 animate-slide-up">
         {[
           { label: 'Tổng chiến dịch', value: campaigns.length.toString(), detail: activeFilter },
           { label: 'Đang gọi vốn', value: liveCampaigns.toString(), detail: 'Cửa sổ cam kết mở' },
-          { label: 'Tỷ lệ on-chain', value: '100%', detail: 'Escrow và phân phối' },
         ].map((metric) => (
           <div key={metric.label} className="bg-surface-2 px-5 py-4">
             <p className="text-xs text-text-muted">{metric.label}</p>
@@ -184,39 +134,6 @@ export default function ExplorePage() {
         )}
       </section>
 
-      <section className="border-t border-border pt-10 animate-slide-up">
-        <div className="mb-6 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="label-caps tracking-widest">Cơ chế hoạt động</p>
-            <h2
-              className="mt-2 text-2xl font-bold tracking-tight"
-              style={{ fontFamily: 'var(--font-display)' }}
-            >
-              Từ hồ sơ IP đến quyết toán on-chain
-            </h2>
-          </div>
-          <p className="max-w-md text-sm leading-relaxed text-text-muted">
-            Launchpad giữ mô hình đơn giản: tạo chiến dịch, góp vốn, rồi quyết toán theo điều kiện đã công bố.
-          </p>
-        </div>
-        <div className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-3">
-          {protocolSteps.map((step, i) => (
-            <div
-              key={step.num}
-              className={`bg-surface-2 p-6 animate-slide-up stagger-${i + 1}`}
-            >
-              <span className="text-xs font-semibold text-accent tabular-nums">{step.num}</span>
-              <h3
-                className="mt-3 text-base font-bold"
-                style={{ fontFamily: 'var(--font-display)' }}
-              >
-                {step.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
     </div>
   )
 }

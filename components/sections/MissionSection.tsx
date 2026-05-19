@@ -88,8 +88,6 @@ const content = {
       "Giảm rào cản thương mại hóa cho nhà sáng tạo Việt",
       "Đưa dữ liệu, quyền lợi và dòng tiền lên hạ tầng minh bạch",
     ],
-    railLabel: "10 lĩnh vực cần vốn thử nghiệm",
-    kicker: "Vietnamese ideas, global frontier",
   },
   en: {
     overline: "Mission",
@@ -102,8 +100,6 @@ const content = {
       "Lower commercialization barriers for Vietnamese builders",
       "Move data, rights, and capital flows onto transparent rails",
     ],
-    railLabel: "10 prototype-capital frontiers",
-    kicker: "Vietnamese ideas, global frontier",
   },
 };
 
@@ -195,11 +191,6 @@ export default function MissionSection() {
 
         <FadeInUp delay={0.18} className="lg:col-span-5">
           <div className="relative h-[34rem] overflow-hidden border border-white/10 bg-white/[0.02] p-3 mission-rail-mask">
-            <div className="absolute left-4 top-4 z-10 border border-white/10 bg-black/70 px-3 py-2 backdrop-blur-md">
-              <p className="font-heading text-[0.65rem] font-semibold uppercase tracking-[0.22em] text-white/55">
-                {mission.railLabel}
-              </p>
-            </div>
             <div className="mission-image-rail grid gap-3">
               {railItems.map((item, index) => (
                 <PlaceholderCard
@@ -210,9 +201,6 @@ export default function MissionSection() {
               ))}
             </div>
           </div>
-          <p className="mt-4 font-heading text-xs font-semibold uppercase tracking-[0.22em] text-white/35">
-            {mission.kicker}
-          </p>
         </FadeInUp>
       </div>
     </section>
