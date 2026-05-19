@@ -1,14 +1,14 @@
 ﻿'use client'
 
-import { useState, useEffect, use } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { CampaignDetail } from '@/components/platform/campaign/CampaignDetail'
 import type { ApiCampaign } from '@/lib/platform/api'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
-export default function CampaignDetailPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
+export default function CampaignDetailPage({ params }: { params: { id: string } }) {
+  const { id } = params
   const [campaign, setCampaign] = useState<ApiCampaign | null>(null)
   const [loading, setLoading] = useState(true)
 
