@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { parseEther } from 'viem'
@@ -45,7 +45,7 @@ export default function NewCampaignPage() {
 
   useEffect(() => {
     if (isConfirmed) {
-      router.push('/app/company')
+      router.push('/launchpad/company')
     }
   }, [isConfirmed, router])
 

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { GlowCard } from '@/components/platform/ui/GlowCard'
@@ -20,7 +20,7 @@ export function CampaignCard({ campaign, index = 0 }: { campaign: ApiCampaign; i
   const glowColor = glowColors[campaign.status] ?? 'rgba(201,168,76,0.06)'
 
   return (
-    <Link href={`/app/campaigns/${campaign.onChainId}`} className="block">
+    <Link href={`/launchpad/campaigns/${campaign.onChainId}`} className="block">
       <GlowCard
         className={`cursor-pointer p-5 animate-slide-up stagger-${Math.min(index + 1, 6)}`}
         glowColor={glowColor}

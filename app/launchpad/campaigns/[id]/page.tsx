@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
@@ -33,7 +33,7 @@ export default function CampaignDetailPage({ params }: { params: Promise<{ id: s
     return (
       <div className="flex flex-col items-center py-20 text-center animate-fade-in">
         <p className="text-sm text-text-secondary">Campaign not found</p>
-        <Link href="/app" className="btn-secondary mt-4 text-sm">
+        <Link href="/launchpad" className="btn-secondary mt-4 text-sm">
           Back to Explore
         </Link>
       </div>
@@ -42,7 +42,7 @@ export default function CampaignDetailPage({ params }: { params: Promise<{ id: s
 
   return (
     <div>
-      <Link href="/app" className="mb-6 inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-primary transition-colors">
+      <Link href="/launchpad" className="mb-6 inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-primary transition-colors">
         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>

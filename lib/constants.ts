@@ -189,47 +189,47 @@ const vi: Content = {
   },
 
   HERO: {
-    tagline: "SỐ HÓA TÀI SẢN TRÍ TUỆ",
+    tagline: "MÃ HÓA SÁNG CHẾ & PHÁT MINH",
     heroLines: [
-      { text: "SỐ HÓA", outline: false },
-      { text: "TÀI SẢN", outline: true },
-      { text: "TRÍ TUỆ", outline: false },
+      { text: "MÃ HÓA", outline: false },
+      { text: "SÁNG CHẾ", outline: true },
+      { text: "KHOA HỌC", outline: false },
     ],
     subheading:
-      "Nền tảng giao dịch & chuyển giao khoa học công nghệ theo mô hình IP & RWA",
+      "Nền tảng mã hóa sáng chế & phát minh khoa học công nghệ theo mô hình RWA",
     description:
-      "IP Foundation kết nối nhà khoa học, doanh nghiệp và nhà đầu tư thông qua nền tảng token hóa tài sản trí tuệ — minh bạch, hiệu quả và tuân thủ pháp luật Việt Nam.",
-    ctaPrimary: "Khám phá nền tảng",
-    ctaSecondary: "Đăng ký sáng chế →",
+      "IP Foundation kết nối tài sản trí tuệ với nguồn vốn để đẩy nhanh quá trình hình thành prototype, chia sẻ rủi ro và tăng tỉ lệ thương mại hóa cho sáng chế & phát minh.",
+    ctaPrimary: "Mở Launchpad",
+    ctaSecondary: "Đưa IP lên nền tảng →",
     stats: [
-      { label: "Công nghệ thí điểm", value: "10-20" },
-      { label: "Token hóa RWA", value: "RWA" },
-      { label: "Tuân thủ pháp luật VN", value: "100%" },
+      { label: "Huy động vốn sớm", value: "R&D" },
+      { label: "Mã hóa RWA", value: "RWA" },
+      { label: "Chia sẻ rủi ro", value: "Token" },
     ],
   },
 
   PROBLEM: {
     sectionTitle: "Bối cảnh & Vấn đề",
     sectionSubtitle:
-      "Thị trường chuyển giao công nghệ tại Việt Nam đang đối mặt với nhiều thách thức lớn",
+      "Tỉ lệ thương mại hóa IP trên thế giới còn thấp; tại Việt Nam, khoảng cách từ nghiên cứu đến sản phẩm mẫu còn lớn hơn",
     cards: [
       {
         icon: "EyeOff",
-        title: "Thiếu minh bạch",
+        title: "Khoảng cách nghiên cứu - thị trường",
         description:
-          "Thông tin về sáng chế và quyền sở hữu trí tuệ không được công khai, gây khó khăn cho việc đánh giá và giao dịch.",
+          "Thiếu nền tảng kết nối tài chính để các kết quả nghiên cứu tiến gần hơn tới prototype, kiểm định và nhu cầu thị trường.",
       },
       {
         icon: "BarChart3",
-        title: "Khó định giá",
+        title: "Thiếu dòng vốn & rào cản tài chính",
         description:
-          "Chưa có phương pháp chuẩn hóa để định giá tài sản trí tuệ, dẫn đến rủi ro cao cho cả bên mua và bên bán.",
+          "Giai đoạn làm sản phẩm mẫu, kiểm định và sản xuất thử cần vốn lớn nhưng chưa tạo doanh thu, trong khi vốn mạo hiểm thường ưu tiên mô hình đã có traction.",
       },
       {
         icon: "Unlink",
-        title: "Đứt gãy kết nối",
+        title: "Khó định giá và thiếu thanh khoản",
         description:
-          "Nhà khoa học và doanh nghiệp thiếu kênh kết nối hiệu quả, nhiều công nghệ tốt không thể thương mại hóa.",
+          "Tài sản trí tuệ khó định giá và khó dùng làm tài sản thế chấp truyền thống, khiến ngân hàng, quỹ và tổ chức tài chính ít tham gia.",
       },
     ],
   },
@@ -237,154 +237,161 @@ const vi: Content = {
   SOLUTION: {
     sectionTitle: "Giải pháp — 4 Trụ Cột",
     sectionSubtitle:
-      "Nền tảng IP Foundation được xây dựng trên 4 trụ cột công nghệ cốt lõi",
+      "IP Foundation chuẩn hóa tài sản trí tuệ, mã hóa quyền lợi kinh tế và mở thị trường vốn cho cộng đồng",
     pillars: [
-      {
-        icon: "ShoppingBag",
-        title: "Marketplace",
-        subtitle: "Sàn giao dịch IP",
-        description:
-          "Đăng và tìm kiếm sáng chế dễ dàng. Hệ thống phân loại thông minh giúp kết nối nhu cầu chính xác.",
-        features: ["Đăng tải sáng chế", "Tìm kiếm thông minh", "Phân loại tự động"],
-      },
       {
         icon: "ShieldCheck",
         title: "Thẩm định & Chuẩn hóa",
         subtitle: "Xác minh quyền sở hữu",
         description:
-          "Xác minh quyền sở hữu IP, kiểm tra tranh chấp và chuẩn hóa tài liệu pháp lý tự động.",
-        features: ["Xác minh quyền sở hữu", "Kiểm tra tranh chấp", "Chuẩn hóa pháp lý"],
+          "Xác minh quyền sở hữu IP, kiểm tra tranh chấp, chuẩn hóa hồ sơ pháp lý và dữ liệu kỹ thuật trước khi đưa tài sản lên nền tảng.",
+        features: ["Xác minh quyền sở hữu", "Chuẩn hóa hồ sơ IP", "Kiểm tra tranh chấp"],
       },
       {
         icon: "Hexagon",
-        title: "Token hóa (RWA)",
-        subtitle: "Chia nhỏ quyền sở hữu",
+        title: "Mã hóa RWA",
+        subtitle: "Chia nhỏ quyền lợi kinh tế",
         description:
-          "Chia nhỏ quyền sở hữu tài sản trí tuệ thành token, giúp huy động vốn dễ dàng và tăng thanh khoản.",
-        features: ["Chia nhỏ quyền sở hữu", "Huy động vốn", "Tăng thanh khoản"],
+          "Chia nhỏ quyền lợi kinh tế của tài sản trí tuệ thành token để nhiều nhà đầu tư cùng tham gia, phân tán rủi ro và mở dòng vốn toàn cầu.",
+        features: ["Token hóa quyền lợi kinh tế", "Chia nhỏ rủi ro", "Tiếp cận nhà đầu tư rộng hơn"],
+      },
+      {
+        icon: "ShoppingBag",
+        title: "Launchpad",
+        subtitle: "Thị trường giao dịch sơ cấp",
+        description:
+          "Huy động vốn sớm cho tài sản trí tuệ, giúp cộng đồng đầu tư vào giai đoạn prototype, kiểm định và sản xuất thử nghiệm.",
+        features: ["Huy động vốn sơ cấp", "Cộng đồng cùng tài trợ", "Chia sẻ rủi ro R&D"],
       },
       {
         icon: "Handshake",
-        title: "Giao dịch & Chuyển giao",
-        subtitle: "Thị trường sơ/thứ cấp",
+        title: "DEX",
+        subtitle: "Thị trường giao dịch thứ cấp",
         description:
-          "Thị trường sơ cấp và thứ cấp cho token IP. Hợp đồng số hóa, giao dịch minh bạch và an toàn.",
-        features: ["Thị trường sơ cấp", "Thị trường thứ cấp", "Hợp đồng số hóa"],
+          "Tạo thanh khoản 24/7 cho token IP, giúp thị trường hình thành giá tham chiếu và mở đường cho giao dịch thứ cấp minh bạch.",
+        features: ["Giao dịch 24/7", "Tăng thanh khoản", "Tạo giá thị trường cho IP"],
       },
     ],
   },
 
   TOKEN_WORKS: {
-    sectionTitle: "Token hóa Tài sản Trí tuệ",
-    sectionSubtitle: "Quy trình chuyển đổi tài sản trí tuệ thành token số",
+    sectionTitle: "Token IP hoạt động như thế nào",
+    sectionSubtitle: "Mỗi token đại diện cho lợi ích kinh tế của một tài sản trí tuệ cụ thể",
     steps: [
       {
         number: "01",
-        title: "Đại diện Quyền lợi",
+        title: "Đại diện Lợi ích Kinh tế",
         description:
-          "Mỗi token đại diện cho quyền sở hữu hoặc quyền hưởng doanh thu từ tài sản trí tuệ cụ thể.",
-        detail: "Token = Quyền tài sản",
+          "Mỗi token đại diện cho quyền lợi kinh tế gắn với một tài sản trí tuệ đã được thẩm định và chuẩn hóa.",
+        detail: "Token = Lợi ích kinh tế",
       },
       {
         number: "02",
-        title: "Phân nhỏ Giá trị",
+        title: "Phân nhỏ Giá trị & Rủi ro",
         description:
-          "Tài sản trí tuệ có giá trị lớn được chia nhỏ thành nhiều phần đầu tư phù hợp với mọi quy mô.",
-        detail: "1 IP → Nhiều token",
+          "Tài sản trí tuệ có giá trị lớn được chia nhỏ thành nhiều phần đầu tư phù hợp với mọi quy mô, đồng thời chia sẻ rủi ro cho cộng đồng.",
+        detail: "1 IP → Nhiều nhà đầu tư",
       },
       {
         number: "03",
         title: "Huy động Vốn",
         description:
-          "Cộng đồng có thể đầu tư vào nghiên cứu và phát triển thông qua việc mua token IP.",
-        detail: "Token → Vốn R&D",
+          "Cộng đồng có thể đầu tư vào tài sản trí tuệ thông qua việc mua token IP trên thị trường sơ cấp.",
+        detail: "Token → Vốn prototype",
+      },
+      {
+        number: "04",
+        title: "Tạo Thanh khoản",
+        description:
+          "Sau giai đoạn sơ cấp, nhà đầu tư có thể giao dịch 24/7 trên thị trường thứ cấp để tăng thanh khoản cho token IP.",
+        detail: "DEX → Thanh khoản IP",
       },
     ],
   },
 
   STAKEHOLDERS: {
     sectionTitle: "Đối tượng Tham gia",
-    sectionSubtitle: "Hệ sinh thái kết nối đa bên trong chuyển giao công nghệ",
+    sectionSubtitle: "Hệ sinh thái kết nối chủ sở hữu IP, cộng đồng đầu tư và các đối tác thẩm định",
     tabs: [
       {
         id: "supply",
-        label: "Bên Cung cấp",
-        title: "Nhà cung cấp Công nghệ",
-        description: "Những người sở hữu và phát triển tài sản trí tuệ",
+        label: "Chủ sở hữu IP",
+        title: "Sở hữu Tài sản Trí tuệ",
+        description: "Những người sở hữu sáng chế, phát minh và kết quả nghiên cứu cần vốn để thương mại hóa",
         items: [
           "Viện nghiên cứu & Trường đại học",
           "Nhà khoa học độc lập",
           "Nhóm R&D doanh nghiệp",
-          "Tổ chức sở hữu bằng sáng chế",
+          "Tổ chức sở hữu sáng chế & giải pháp hữu ích",
         ],
       },
       {
         id: "demand",
-        label: "Bên Nhu cầu",
-        title: "Bên tiếp nhận Công nghệ",
-        description: "Những người cần ứng dụng công nghệ mới",
+        label: "Nhà đầu tư",
+        title: "Cộng đồng Đầu tư",
+        description: "Những người muốn tham gia sớm vào tài sản trí tuệ có tiềm năng thông qua token",
         items: [
-          "Doanh nghiệp sản xuất",
-          "Quỹ đầu tư mạo hiểm (VC)",
           "Nhà đầu tư cá nhân",
-          "Startup công nghệ",
+          "Quỹ đầu tư mạo hiểm (VC)",
+          "Doanh nghiệp tìm kiếm công nghệ mới",
+          "Cộng đồng Web3 & RWA",
         ],
       },
       {
         id: "intermediary",
-        label: "Trung gian & Hỗ trợ",
-        title: "Đơn vị Hỗ trợ",
-        description: "Các đối tác hỗ trợ quá trình chuyển giao",
+        label: "Thẩm định & Hỗ trợ",
+        title: "Đơn vị Thẩm định, Pháp lý và Triển khai",
+        description: "Các đối tác hỗ trợ định giá, chuẩn hóa, bảo vệ và đưa tài sản trí tuệ ra thị trường",
         items: [
           "Tổ chức chuyển giao công nghệ",
           "Đơn vị thẩm định giá",
           "Tư vấn pháp lý IP",
-          "Chuyên gia định giá",
+          "Đối tác sản xuất thử nghiệm & thương mại hóa",
         ],
       },
     ],
   },
 
   BENEFITS: {
-    sectionTitle: "Lợi ích cho Đối tác",
-    sectionSubtitle: "Giá trị thiết thực cho mọi bên tham gia hệ sinh thái",
+    sectionTitle: "Giá trị cho Hệ sinh thái IP",
+    sectionSubtitle: "Cơ chế token giúp đưa vốn, cộng đồng và thanh khoản đến gần tài sản trí tuệ hơn",
     learnMore: "Tìm hiểu thêm",
     stats: [
-      { value: "3x", label: "Tốc độ thương mại hóa" },
-      { value: "60%", label: "Giảm chi phí R&D" },
-      { value: "100%", label: "Minh bạch pháp lý" },
+      { value: "24/7", label: "Thanh khoản thứ cấp" },
+      { value: "RWA", label: "Tài sản trí tuệ mã hóa" },
+      { value: "IP", label: "Nguồn vốn cho prototype" },
     ],
     scientists: {
-      title: "Nhà khoa học & Nghiên cứu",
+      title: "Chủ sở hữu IP",
       items: [
         {
-          title: "Thương mại hóa hiệu quả",
-          description: "Đưa kết quả nghiên cứu ra thị trường nhanh chóng và hiệu quả hơn.",
+          title: "Huy động vốn cho prototype",
+          description: "Tiếp cận nguồn vốn sớm để phát triển sản phẩm mẫu, kiểm định và sản xuất thử nghiệm.",
         },
         {
-          title: "Huy động vốn R&D trực tiếp",
-          description: "Tiếp cận nguồn vốn đầu tư trực tiếp cho nghiên cứu và phát triển.",
+          title: "Giảm phụ thuộc vào vốn truyền thống",
+          description: "Không cần chờ ngân hàng, quỹ hoặc doanh nghiệp lớn trước khi kiểm chứng giá trị thị trường.",
         },
         {
-          title: "Minh bạch quyền sở hữu",
-          description: "Ghi nhận và bảo vệ quyền sở hữu trí tuệ trên blockchain.",
+          title: "Minh bạch và chuẩn hóa hồ sơ",
+          description: "Hồ sơ IP được thẩm định, chuẩn hóa và thể hiện rõ quyền lợi kinh tế khi gọi vốn.",
         },
       ],
     },
     enterprises: {
-      title: "Doanh nghiệp",
+      title: "Nhà đầu tư",
       items: [
         {
-          title: "Tiếp cận công nghệ nhanh",
-          description: "Tìm kiếm và tiếp cận công nghệ phù hợp một cách nhanh chóng.",
+          title: "Tiếp cận IP giai đoạn sớm",
+          description: "Tham gia vào sáng chế và phát minh tiềm năng trước khi chúng trở thành sản phẩm thương mại.",
         },
         {
-          title: "Giảm chi phí & rủi ro R&D",
-          description: "Tiết kiệm thời gian và chi phí nghiên cứu phát triển nội bộ.",
+          title: "Chia nhỏ vốn và rủi ro",
+          description: "Đầu tư theo quy mô linh hoạt, phân tán rủi ro qua nhiều tài sản trí tuệ khác nhau.",
         },
         {
-          title: "Quyền khai thác rõ ràng",
-          description: "Hợp đồng số hóa đảm bảo quyền khai thác pháp lý minh bạch.",
+          title: "Thanh khoản thứ cấp",
+          description: "Giao dịch token IP trên DEX để có lối ra thanh khoản và tín hiệu định giá thị trường.",
         },
       ],
     },
@@ -423,39 +430,39 @@ const vi: Content = {
 
   ROADMAP: {
     sectionTitle: "Lộ trình Triển khai",
-    sectionSubtitle: "Chiến lược phát triển từ thị trường nội địa đến quốc tế",
+    sectionSubtitle: "Từ chuẩn hóa IP, launchpad sơ cấp đến thanh khoản thứ cấp và mở rộng toàn cầu",
     phases: [
       {
         phase: "Giai đoạn 1",
-        title: "Thị trường Việt Nam",
+        title: "Thẩm định & Launchpad",
         status: "active",
         items: [
-          "Thí điểm 10-20 công nghệ",
-          "Token hóa thị trường sơ cấp",
-          "Xây dựng cộng đồng",
-          "Hoàn thiện pháp lý",
+          "Chuẩn hóa hồ sơ IP đầu tiên",
+          "Mở thị trường sơ cấp cho token IP",
+          "Huy động vốn cho prototype",
+          "Xây dựng cộng đồng nhà đầu tư",
         ],
       },
       {
         phase: "Giai đoạn 2",
-        title: "Mở rộng & Tích hợp",
+        title: "DEX & Thanh khoản",
         status: "upcoming",
         items: [
-          "Thị trường thứ cấp",
-          "Đa ngành nghề",
-          "Tích hợp DeFi",
-          "Mở rộng đối tác",
+          "Kích hoạt giao dịch thứ cấp",
+          "Tạo thanh khoản 24/7 cho token IP",
+          "Hình thành giá tham chiếu thị trường",
+          "Mở rộng nhóm tài sản trí tuệ",
         ],
       },
       {
         phase: "Giai đoạn 3",
-        title: "Vươn tầm Quốc tế",
+        title: "Mở rộng Toàn cầu",
         status: "future",
         items: [
-          "Kết nối thị trường toàn cầu",
+          "Kết nối nhà đầu tư quốc tế",
           "Multi-chain, multi-currency",
-          "Hợp tác quốc tế",
-          "Tiêu chuẩn toàn cầu",
+          "Hợp tác với viện nghiên cứu và đại học",
+          "Chuẩn hóa mô hình IP-RWA",
         ],
       },
     ],
@@ -463,7 +470,7 @@ const vi: Content = {
 
   LEGAL: {
     items: [
-      "Token đại diện quyền tài sản (không phải tiền/chứng khoán)",
+      "Token đại diện lợi ích kinh tế gắn với tài sản trí tuệ",
       "Tuân thủ pháp luật Việt Nam",
       "Hướng tới Sandbox pháp lý",
     ],
@@ -507,14 +514,14 @@ const vi: Content = {
   },
 
   FOOTER: {
-    tagline: "Nền tảng Số hóa Tài sản Trí tuệ",
+    tagline: "Launchpad mã hóa sáng chế & phát minh khoa học công nghệ",
     columns: [
       {
         title: "Nền tảng",
         links: [
-          { label: "Marketplace", href: "#giai-phap" },
-          { label: "Token hóa", href: "#giai-phap" },
-          { label: "Thẩm định", href: "#giai-phap" },
+          { label: "Thẩm định IP", href: "#giai-phap" },
+          { label: "Launchpad", href: "#giai-phap" },
+          { label: "DEX", href: "#giai-phap" },
         ],
       },
       {
@@ -560,202 +567,209 @@ const en: Content = {
   },
 
   HERO: {
-    tagline: "DIGITIZE INTELLECTUAL PROPERTY",
+    tagline: "TOKENIZE INVENTIONS & SCIENTIFIC IP",
     heroLines: [
-      { text: "DIGITIZE", outline: false },
-      { text: "INTELLECTUAL", outline: true },
-      { text: "PROPERTY", outline: false },
+      { text: "TOKENIZE", outline: false },
+      { text: "INVENTIONS", outline: true },
+      { text: "SCIENCE", outline: false },
     ],
     subheading:
-      "Platform for science & technology trading and transfer using IP & RWA tokenization",
+      "A launchpad for scientific inventions and intellectual property using RWA tokenization",
     description:
-      "IP Foundation connects scientists, enterprises, and investors through an intellectual property tokenization platform — transparent, efficient, and compliant with Vietnamese law.",
-    ctaPrimary: "Explore Platform",
-    ctaSecondary: "Register Patent →",
+      "IP Foundation connects intellectual property with early capital to accelerate prototypes, share commercialization risk, and improve the odds that inventions reach the market.",
+    ctaPrimary: "Open Launchpad",
+    ctaSecondary: "List Your IP →",
     stats: [
-      { label: "Pilot Technologies", value: "10-20" },
+      { label: "Early R&D Funding", value: "R&D" },
       { label: "RWA Tokenization", value: "RWA" },
-      { label: "VN Legal Compliance", value: "100%" },
+      { label: "Shared Risk", value: "Token" },
     ],
   },
 
   PROBLEM: {
     sectionTitle: "Context & Challenges",
     sectionSubtitle:
-      "Vietnam's technology transfer market faces significant challenges",
+      "IP commercialization rates remain low globally; in Vietnam, the gap from research to prototype is even harder to finance",
     cards: [
       {
         icon: "EyeOff",
-        title: "Lack of Transparency",
+        title: "Research-to-market gap",
         description:
-          "Patent and IP ownership information is not publicly accessible, making evaluation and transactions difficult.",
+          "Scientific results need a capital bridge before they can become prototypes, be validated, and meet real market demand.",
       },
       {
         icon: "BarChart3",
-        title: "Valuation Difficulties",
+        title: "Funding gap and financial barriers",
         description:
-          "No standardized method exists for valuing intellectual property, leading to high risk for both buyers and sellers.",
+          "Prototype development, validation, and trial production require capital before revenue exists, while venture funding usually favors proven traction.",
       },
       {
         icon: "Unlink",
-        title: "Broken Connections",
+        title: "Hard to value, hard to finance",
         description:
-          "Scientists and enterprises lack effective channels to connect, leaving many good technologies uncommercialized.",
+          "Intellectual property is difficult to price and rarely accepted as traditional collateral, limiting participation from banks and financial institutions.",
       },
     ],
   },
 
   SOLUTION: {
-    sectionTitle: "Solutions — 4 Pillars",
+    sectionTitle: "Solution — 4 Pillars",
     sectionSubtitle:
-      "The IP Foundation platform is built on 4 core technology pillars",
+      "IP Foundation standardizes intellectual property, tokenizes economic rights, and opens capital markets to the community",
     pillars: [
-      {
-        icon: "ShoppingBag",
-        title: "Marketplace",
-        subtitle: "IP Exchange",
-        description:
-          "Easily list and search patents. A smart classification system accurately matches supply with demand.",
-        features: ["List Patents", "Smart Search", "Auto Classification"],
-      },
       {
         icon: "ShieldCheck",
         title: "Verification & Standardization",
-        subtitle: "Ownership Verification",
+        subtitle: "Ownership verification",
         description:
-          "Verify IP ownership, check for disputes, and automatically standardize legal documentation.",
-        features: ["Ownership Verification", "Dispute Check", "Legal Standardization"],
+          "Verify IP ownership, check disputes, and standardize legal and technical documentation before an asset enters the platform.",
+        features: ["Ownership verification", "IP dossier standardization", "Dispute checks"],
       },
       {
         icon: "Hexagon",
-        title: "Tokenization (RWA)",
-        subtitle: "Fractional Ownership",
+        title: "RWA Tokenization",
+        subtitle: "Fractional economic rights",
         description:
-          "Fractionalize IP ownership into tokens, enabling easy fundraising and increased liquidity.",
-        features: ["Fractional Ownership", "Fundraising", "Increase Liquidity"],
+          "Split the economic rights of intellectual property into tokens so more investors can participate, risk can be shared, and global capital can enter earlier.",
+        features: ["Tokenized economic rights", "Shared risk", "Broader investor access"],
+      },
+      {
+        icon: "ShoppingBag",
+        title: "Launchpad",
+        subtitle: "Primary market",
+        description:
+          "Raise early capital for IP assets so the community can fund prototype development, validation, and trial production.",
+        features: ["Primary fundraising", "Community-backed R&D", "Prototype capital"],
       },
       {
         icon: "Handshake",
-        title: "Trading & Transfer",
-        subtitle: "Primary / Secondary Market",
+        title: "DEX",
+        subtitle: "Secondary market",
         description:
-          "Primary and secondary markets for IP tokens. Digitized contracts ensure transparent and secure trading.",
-        features: ["Primary Market", "Secondary Market", "Digital Contracts"],
+          "Create 24/7 liquidity for IP tokens, helping the market discover prices and giving investors a secondary trading path.",
+        features: ["24/7 trading", "Liquidity for IP", "Market price discovery"],
       },
     ],
   },
 
   TOKEN_WORKS: {
-    sectionTitle: "IP Asset Tokenization",
-    sectionSubtitle: "The process of converting intellectual property into digital tokens",
+    sectionTitle: "How IP Tokens Work",
+    sectionSubtitle: "Each token represents economic exposure to a specific intellectual property asset",
     steps: [
       {
         number: "01",
-        title: "Represent Rights",
+        title: "Represent Economic Rights",
         description:
-          "Each token represents ownership or revenue rights tied to a specific intellectual property asset.",
-        detail: "Token = Property Rights",
+          "Each token represents economic rights linked to an intellectual property asset that has been verified and standardized.",
+        detail: "Token = Economic rights",
       },
       {
         number: "02",
-        title: "Fractionalize Value",
+        title: "Fractionalize Value & Risk",
         description:
-          "High-value intellectual property is divided into smaller investment portions suitable for any scale.",
-        detail: "1 IP → Multiple Tokens",
+          "High-value IP is divided into investment portions suitable for different capital sizes while spreading commercialization risk across the community.",
+        detail: "1 IP → Many investors",
       },
       {
         number: "03",
         title: "Raise Capital",
         description:
-          "The community can invest in research and development by purchasing IP tokens.",
-        detail: "Token → R&D Capital",
+          "The community can fund IP assets by buying IP tokens in the primary launchpad market.",
+        detail: "Token → Prototype capital",
+      },
+      {
+        number: "04",
+        title: "Create Liquidity",
+        description:
+          "After the primary phase, investors can trade 24/7 in the secondary market to create liquidity for IP tokens.",
+        detail: "DEX → IP liquidity",
       },
     ],
   },
 
   STAKEHOLDERS: {
     sectionTitle: "Participants",
-    sectionSubtitle: "A multi-party ecosystem connecting technology transfer stakeholders",
+    sectionSubtitle: "A multi-party ecosystem connecting IP owners, investor communities, and verification partners",
     tabs: [
       {
         id: "supply",
-        label: "Supply Side",
-        title: "Technology Providers",
-        description: "Those who own and develop intellectual property",
+        label: "IP Owners",
+        title: "Intellectual Property Owners",
+        description: "People and organizations that own inventions, patents, and research results that need capital to commercialize",
         items: [
           "Research Institutes & Universities",
           "Independent Scientists",
           "Corporate R&D Teams",
-          "Patent-Holding Organizations",
+          "Patent and utility-solution owners",
         ],
       },
       {
         id: "demand",
-        label: "Demand Side",
-        title: "Technology Adopters",
-        description: "Those who need to apply new technologies",
+        label: "Investors",
+        title: "Investor Community",
+        description: "People who want early exposure to promising intellectual property through tokenized participation",
         items: [
-          "Manufacturing Enterprises",
-          "Venture Capital Funds (VC)",
           "Individual Investors",
-          "Tech Startups",
+          "Venture Capital Funds (VC)",
+          "Enterprises seeking new technology",
+          "Web3 and RWA communities",
         ],
       },
       {
         id: "intermediary",
-        label: "Intermediaries & Support",
-        title: "Support Organizations",
-        description: "Partners that facilitate the transfer process",
+        label: "Verification & Support",
+        title: "Verification, Legal, and Execution Partners",
+        description: "Partners that help price, standardize, protect, and bring IP assets to market",
         items: [
           "Technology Transfer Organizations",
           "Valuation Firms",
           "IP Legal Consultants",
-          "Valuation Experts",
+          "Trial production and commercialization partners",
         ],
       },
     ],
   },
 
   BENEFITS: {
-    sectionTitle: "Partner Benefits",
-    sectionSubtitle: "Tangible value for every participant in the ecosystem",
+    sectionTitle: "Value for the IP Ecosystem",
+    sectionSubtitle: "Token mechanics bring capital, community, and liquidity closer to intellectual property",
     learnMore: "Learn more",
     stats: [
-      { value: "3x", label: "Commercialization Speed" },
-      { value: "60%", label: "R&D Cost Reduction" },
-      { value: "100%", label: "Legal Transparency" },
+      { value: "24/7", label: "Secondary liquidity" },
+      { value: "RWA", label: "Tokenized IP assets" },
+      { value: "IP", label: "Prototype capital" },
     ],
     scientists: {
-      title: "Scientists & Researchers",
+      title: "IP Owners",
       items: [
         {
-          title: "Effective Commercialization",
-          description: "Bring research results to market faster and more efficiently.",
+          title: "Raise prototype capital",
+          description: "Access early funding for prototypes, validation, and trial production.",
         },
         {
-          title: "Direct R&D Funding",
-          description: "Access direct investment capital for research and development.",
+          title: "Reduce dependence on traditional finance",
+          description: "Do not wait for banks, large enterprises, or venture funds before testing market appetite.",
         },
         {
-          title: "Transparent Ownership",
-          description: "Record and protect intellectual property rights on blockchain.",
+          title: "Standardized and transparent IP profile",
+          description: "Present verified IP documentation and clear economic rights when raising capital.",
         },
       ],
     },
     enterprises: {
-      title: "Enterprises",
+      title: "Investors",
       items: [
         {
-          title: "Rapid Tech Access",
-          description: "Quickly find and access suitable technologies.",
+          title: "Early access to IP assets",
+          description: "Participate in promising inventions before they become commercial products.",
         },
         {
-          title: "Reduce R&D Cost & Risk",
-          description: "Save time and reduce internal research and development expenses.",
+          title: "Fractional capital and risk",
+          description: "Invest with flexible sizing and spread risk across multiple IP assets.",
         },
         {
-          title: "Clear Exploitation Rights",
-          description: "Digitized contracts ensure transparent legal exploitation rights.",
+          title: "Secondary liquidity",
+          description: "Trade IP tokens on a DEX for a liquidity path and market price signal.",
         },
       ],
     },
@@ -794,39 +808,39 @@ const en: Content = {
 
   ROADMAP: {
     sectionTitle: "Implementation Roadmap",
-    sectionSubtitle: "Development strategy from domestic to international markets",
+    sectionSubtitle: "From IP standardization and primary launchpad to secondary liquidity and global expansion",
     phases: [
       {
         phase: "Phase 1",
-        title: "Vietnam Market",
+        title: "Verification & Launchpad",
         status: "active",
         items: [
-          "Pilot 10–20 technologies",
-          "Primary market tokenization",
-          "Build community",
-          "Finalize legal framework",
+          "Standardize initial IP profiles",
+          "Open primary market for IP tokens",
+          "Fund prototype development",
+          "Build the investor community",
         ],
       },
       {
         phase: "Phase 2",
-        title: "Expansion & Integration",
+        title: "DEX & Liquidity",
         status: "upcoming",
         items: [
-          "Secondary market",
-          "Multi-industry expansion",
-          "DeFi integration",
-          "Expand partnerships",
+          "Enable secondary trading",
+          "Create 24/7 liquidity for IP tokens",
+          "Establish market price references",
+          "Expand the IP asset universe",
         ],
       },
       {
         phase: "Phase 3",
-        title: "Going Global",
+        title: "Global Expansion",
         status: "future",
         items: [
-          "Connect to global markets",
+          "Connect international investors",
           "Multi-chain, multi-currency",
-          "International partnerships",
-          "Global standards",
+          "Partner with universities and research institutes",
+          "Standardize the IP-RWA model",
         ],
       },
     ],
@@ -834,7 +848,7 @@ const en: Content = {
 
   LEGAL: {
     items: [
-      "Tokens represent property rights (not currency or securities)",
+      "Tokens represent economic rights linked to intellectual property",
       "Compliant with Vietnamese law",
       "Targeting legal Sandbox framework",
     ],
@@ -878,14 +892,14 @@ const en: Content = {
   },
 
   FOOTER: {
-    tagline: "Intellectual Property Digitization Platform",
+    tagline: "Launchpad for tokenized inventions and scientific intellectual property",
     columns: [
       {
         title: "Platform",
         links: [
-          { label: "Marketplace", href: "#giai-phap" },
-          { label: "Tokenization", href: "#giai-phap" },
-          { label: "Verification", href: "#giai-phap" },
+          { label: "IP Verification", href: "#giai-phap" },
+          { label: "Launchpad", href: "#giai-phap" },
+          { label: "DEX", href: "#giai-phap" },
         ],
       },
       {

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -46,7 +46,7 @@ export default function CompanyPage() {
           </p>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/app/company/campaigns/new" className="btn-primary text-sm">
+          <Link href="/launchpad/company/campaigns/new" className="btn-primary text-sm">
             Create Campaign
           </Link>
           <button onClick={logout} className="btn-secondary text-sm">
@@ -81,7 +81,7 @@ export default function CompanyPage() {
             No campaigns created yet.
           </p>
           <Link
-            href="/app/company/campaigns/new"
+            href="/launchpad/company/campaigns/new"
             className="btn-primary mt-4 inline-block text-sm"
           >
             Create your first campaign

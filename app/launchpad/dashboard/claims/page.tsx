@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useAccount } from 'wagmi'
 import { useState, useEffect } from 'react'
@@ -43,7 +43,7 @@ export default function ClaimsPage() {
 
   return (
     <div className="animate-fade-in">
-      <Link href="/app/dashboard" className="mb-4 inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-primary transition-colors">
+      <Link href="/launchpad/dashboard" className="mb-4 inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-primary transition-colors">
         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
@@ -67,7 +67,7 @@ export default function ClaimsPage() {
             <div key={contractAddress}>
               <div className="mb-2 flex items-center gap-2">
                 <Link
-                  href={`/app/campaigns/${campaign.onChainId}`}
+                  href={`/launchpad/campaigns/${campaign.onChainId}`}
                   className="text-sm font-bold text-accent hover:text-accent/80 transition-colors"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >

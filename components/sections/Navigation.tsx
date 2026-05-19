@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
@@ -161,7 +161,7 @@ export default function Navigation() {
               <SharpButton
                 variant="primary"
                 className="!py-2 !px-4 !text-xs"
-                onClick={() => router.push("/app")}
+                onClick={() => router.push("/launchpad")}
               >
                 {NAV.cta}
               </SharpButton>
@@ -239,7 +239,7 @@ export default function Navigation() {
                   variant="primary"
                   onClick={() => {
                     setMobileOpen(false);
-                    router.push("/app");
+                    router.push("/launchpad");
                   }}
                 >
                   {NAV.cta}

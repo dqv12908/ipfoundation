@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -73,7 +73,7 @@ export default function AdminCampaignsPage() {
                   <td className="px-4 py-2.5 text-text-secondary text-xs tabular-nums">{formatRaise(c.minRaise)} — {formatRaise(c.maxRaise)}</td>
                   <td className="px-4 py-2.5 text-text-muted text-[0.6875rem]">{formatDate(c.startTime)}</td>
                   <td className="px-4 py-2.5">
-                    <Link href={`/app/admin/campaigns/${c.onChainId}`} className="text-xs font-medium text-accent hover:text-accent/80 transition-colors">
+                    <Link href={`/launchpad/admin/campaigns/${c.onChainId}`} className="text-xs font-medium text-accent hover:text-accent/80 transition-colors">
                       Review
                     </Link>
                   </td>

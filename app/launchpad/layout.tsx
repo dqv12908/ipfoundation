@@ -17,9 +17,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "IP Foundation App - Tokenized Intellectual Property",
+  title: "IP Foundation Launchpad - Tokenized Intellectual Property",
   description:
-    "The IP Foundation launchpad for IP-backed token presale campaigns.",
+    "The IP Foundation launchpad for tokenized inventions, scientific IP, and IP-backed fundraising.",
 };
 
 export default function PlatformLayout({

@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import Link from 'next/link'
 import { shortAddress } from '@/lib/platform/format'
@@ -34,7 +34,7 @@ export function PostCard({ post, follower, isFollowing, onFollowToggle }: PostCa
       {/* Header: campaign info + follow */}
       <div className="mb-3 flex items-start justify-between gap-3">
         <Link
-          href={`/app/campaigns/${post.campaign?.onChainId}`}
+          href={`/launchpad/campaigns/${post.campaign?.onChainId}`}
           className="group min-w-0 flex-1"
         >
           <div className="flex items-center gap-3">

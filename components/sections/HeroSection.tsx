@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useRouter } from "next/navigation";
 import { useLang } from "@/lib/i18n";
@@ -63,13 +63,13 @@ export default function HeroSection() {
               <div className="flex flex-wrap gap-3 pt-2">
                 <SharpButton
                   variant="primary"
-                  onClick={() => router.push("/app")}
+                  onClick={() => router.push("/launchpad")}
                 >
                   {HERO.ctaPrimary}
                 </SharpButton>
                 <SharpButton
                   variant="outline"
-                  onClick={() => router.push("/app")}
+                  onClick={() => router.push("/launchpad")}
                 >
                   {HERO.ctaSecondary}
                 </SharpButton>

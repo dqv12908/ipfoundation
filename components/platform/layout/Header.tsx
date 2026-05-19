@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useState, useEffect } from 'react'
 import { ConnectKitButton } from 'connectkit'
@@ -6,10 +6,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
-  { href: '/app', label: 'Explore' },
-  { href: '/app/feed', label: 'Feed' },
-  { href: '/app/dashboard', label: 'Portfolio' },
-  { href: '/app/company', label: 'Company' },
+  { href: '/launchpad', label: 'Explore' },
+  { href: '/launchpad/feed', label: 'Feed' },
+  { href: '/launchpad/dashboard', label: 'Portfolio' },
+  { href: '/launchpad/company', label: 'Company' },
 ]
 
 export function Header() {
@@ -39,7 +39,7 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
         {/* Logo */}
-        <Link href="/app" className="group flex items-center gap-2.5">
+        <Link href="/launchpad" className="group flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-surface transition-transform duration-200 group-hover:scale-105">
             IP
           </div>
@@ -55,8 +55,8 @@ export function Header() {
         <nav className="hidden items-center gap-0.5 md:flex">
           {navLinks.map((link) => {
             const isActive =
-              link.href === '/app'
-                ? pathname === '/app'
+              link.href === '/launchpad'
+                ? pathname === '/launchpad'
                 : pathname === link.href || pathname.startsWith(`${link.href}/`)
             return (
               <Link
@@ -116,8 +116,8 @@ export function Header() {
         <nav className="flex flex-col gap-0.5 px-5 py-3">
           {navLinks.map((link) => {
             const isActive =
-              link.href === '/app'
-                ? pathname === '/app'
+              link.href === '/launchpad'
+                ? pathname === '/launchpad'
                 : pathname === link.href || pathname.startsWith(`${link.href}/`)
             return (
               <Link

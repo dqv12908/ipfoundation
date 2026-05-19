@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useAccount, useBalance } from 'wagmi'
 import Link from 'next/link'
@@ -43,10 +43,10 @@ export default function DashboardPage() {
         <div className="panel p-5">
           <p className="mb-3 text-xs text-text-muted">Quick Links</p>
           <div className="flex gap-2">
-            <Link href="/app/dashboard/participations" className="btn-secondary flex-1 text-center text-xs">
+            <Link href="/launchpad/dashboard/participations" className="btn-secondary flex-1 text-center text-xs">
               Participations
             </Link>
-            <Link href="/app/dashboard/claims" className="btn-secondary flex-1 text-center text-xs">
+            <Link href="/launchpad/dashboard/claims" className="btn-secondary flex-1 text-center text-xs">
               Claims
             </Link>
           </div>

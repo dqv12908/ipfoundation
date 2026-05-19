@@ -17,23 +17,25 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "IP Foundation - Nền tảng Số hóa Tài sản Trí tuệ",
+  title: "IP Foundation - Launchpad Mã hóa Sáng chế & IP Khoa học",
   description:
-    "Nền tảng giao dịch và chuyển giao khoa học công nghệ theo mô hình IP & RWA tokenization. Số hóa tài sản trí tuệ, kết nối nhà khoa học với doanh nghiệp.",
+    "Nền tảng mã hóa sáng chế và phát minh khoa học công nghệ theo mô hình RWA, kết nối tài sản trí tuệ với nguồn vốn prototype, cộng đồng đầu tư và thanh khoản thứ cấp.",
   keywords: [
     "IP Foundation",
     "tài sản trí tuệ",
     "RWA tokenization",
-    "chuyển giao công nghệ",
+    "IP launchpad",
+    "sáng chế",
+    "phát minh khoa học",
     "blockchain",
-    "sở hữu trí tuệ",
+    "DEX",
     "token hóa",
   ],
   authors: [{ name: "IP Foundation" }],
   openGraph: {
-    title: "IP Foundation - Số hóa Tài sản Trí tuệ",
+    title: "IP Foundation - Launchpad Mã hóa Sáng chế & IP Khoa học",
     description:
-      "Nền tảng giao dịch và chuyển giao khoa học công nghệ theo mô hình IP & RWA tokenization.",
+      "Nền tảng mã hóa sáng chế và phát minh khoa học công nghệ theo mô hình RWA.",
     url: "https://ip-foundation.com",
     siteName: "IP Foundation",
     locale: "vi_VN",
@@ -41,9 +43,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "IP Foundation - Số hóa Tài sản Trí tuệ",
+    title: "IP Foundation - Launchpad Mã hóa Sáng chế & IP Khoa học",
     description:
-      "Nền tảng giao dịch và chuyển giao khoa học công nghệ theo mô hình IP & RWA tokenization.",
+      "Nền tảng mã hóa sáng chế và phát minh khoa học công nghệ theo mô hình RWA.",
   },
   robots: { index: true, follow: true },
 };
@@ -65,7 +67,7 @@ export default function RootLayout({
               name: "IP Foundation",
               url: "https://ip-foundation.com",
               description:
-                "Nền tảng giao dịch và chuyển giao khoa học công nghệ theo mô hình IP & RWA tokenization.",
+                "Nền tảng mã hóa sáng chế và phát minh khoa học công nghệ theo mô hình RWA.",
               contactPoint: {
                 "@type": "ContactPoint",
                 telephone: "+84-968-813-228",

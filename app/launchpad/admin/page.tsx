@@ -1,4 +1,4 @@
-'use client'
+﻿'use client'
 
 import { useAccount, useReadContract } from 'wagmi'
 import Link from 'next/link'
@@ -54,13 +54,13 @@ export default function AdminPage() {
         <div className="panel p-5">
           <p className="mb-3 text-xs text-text-muted">Quick Actions</p>
           <div className="flex flex-col gap-2">
-            <Link href="/app/admin/campaigns" className="btn-secondary text-center text-sm">
+            <Link href="/launchpad/admin/campaigns" className="btn-secondary text-center text-sm">
               Review Queue
             </Link>
-            <Link href="/app/admin/companies" className="btn-secondary text-center text-sm">
+            <Link href="/launchpad/admin/companies" className="btn-secondary text-center text-sm">
               Company Accounts
             </Link>
-            <Link href="/app/admin/controls" className="btn-secondary text-center text-sm">
+            <Link href="/launchpad/admin/controls" className="btn-secondary text-center text-sm">
               Emergency Controls
             </Link>
           </div>
