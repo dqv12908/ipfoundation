@@ -3,17 +3,77 @@
 import { useLang } from "@/lib/i18n";
 import { FadeInUp } from "@/components/ui/MotionWrappers";
 
-const placeholders = [
-  { code: "01", title: "Deeptech Lab", tone: "from-blue-600/50 to-white/10" },
-  { code: "02", title: "Chip Design", tone: "from-white/20 to-blue-500/30" },
-  { code: "03", title: "AI Systems", tone: "from-blue-500/40 to-slate-200/10" },
-  { code: "04", title: "Robotics", tone: "from-cyan-300/30 to-blue-700/30" },
-  { code: "05", title: "Clean Energy", tone: "from-emerald-300/20 to-blue-500/35" },
-  { code: "06", title: "Medtech", tone: "from-white/15 to-sky-500/35" },
-  { code: "07", title: "Materials", tone: "from-blue-300/20 to-zinc-100/10" },
-  { code: "08", title: "Agri Science", tone: "from-lime-300/20 to-blue-600/30" },
-  { code: "09", title: "Aerospace", tone: "from-indigo-400/35 to-white/10" },
-  { code: "10", title: "Vietnam IP", tone: "from-red-500/20 to-blue-500/40" },
+const missionImages = [
+  {
+    code: "01",
+    title: "Deeptech Lab",
+    image:
+      "https://images.unsplash.com/photo-1748281296151-b3209b37e1cb?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "02",
+    title: "Electronics R&D",
+    image:
+      "https://images.unsplash.com/photo-1705579609060-e10eda421073?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "03",
+    title: "AI Systems",
+    image:
+      "https://images.unsplash.com/photo-1665690399857-9de8bbbeb108?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "04",
+    title: "Robotics",
+    image:
+      "https://images.unsplash.com/photo-1647427060118-4911c9821b82?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "05",
+    title: "Clean Energy",
+    image:
+      "https://images.unsplash.com/photo-1680050977814-39ddd9330a2e?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "06",
+    title: "Medtech",
+    image:
+      "https://images.unsplash.com/photo-1766297247287-9bf80d5f8281?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "07",
+    title: "Materials",
+    image:
+      "https://images.unsplash.com/photo-1748261347902-451fb437e8fb?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "08",
+    title: "Agri Science",
+    image:
+      "https://images.unsplash.com/photo-1769259047014-83149b3c9ca7?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "09",
+    title: "Aerospace",
+    image:
+      "https://images.unsplash.com/photo-1773750923599-2434b82fdcd3?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
+  {
+    code: "10",
+    title: "Vietnam IP",
+    image:
+      "https://images.unsplash.com/photo-1758533116847-3776b266cbdc?auto=format&fit=crop&w=900&q=80",
+    position: "center",
+  },
 ];
 
 const content = {
@@ -51,7 +111,7 @@ function PlaceholderCard({
   item,
   duplicate,
 }: {
-  item: (typeof placeholders)[number];
+  item: (typeof missionImages)[number];
   duplicate?: boolean;
 }) {
   return (
@@ -61,7 +121,14 @@ function PlaceholderCard({
       role={duplicate ? undefined : "img"}
       className="group relative h-40 overflow-hidden border border-white/10 bg-white/[0.035] p-4 sm:h-44"
     >
-      <div className={`absolute inset-0 bg-gradient-to-br ${item.tone}`} />
+      <div
+        className="absolute inset-0 scale-105 bg-cover bg-center transition-transform duration-500 group-hover:scale-110"
+        style={{
+          backgroundImage: `url(${item.image})`,
+          backgroundPosition: item.position,
+        }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-br from-accent-blue/35 via-black/10 to-black/70" />
       <div className="absolute inset-0 bg-grid opacity-20" />
       <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black via-black/60 to-transparent" />
       <div className="relative flex h-full flex-col justify-between">
@@ -82,7 +149,7 @@ function PlaceholderCard({
 export default function MissionSection() {
   const { locale } = useLang();
   const mission = content[locale];
-  const railItems = [...placeholders, ...placeholders];
+  const railItems = [...missionImages, ...missionImages];
 
   return (
     <section id="su-menh" className="relative overflow-hidden bg-black py-20 md:py-28">
@@ -138,7 +205,7 @@ export default function MissionSection() {
                 <PlaceholderCard
                   key={`${item.code}-${index}`}
                   item={item}
-                  duplicate={index >= placeholders.length}
+                  duplicate={index >= missionImages.length}
                 />
               ))}
             </div>
