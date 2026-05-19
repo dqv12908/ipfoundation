@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useSpring } from "framer-motion";
+import { useEffect, useState } from "react";
 import { useReducedMotion } from "@/lib/utils";
 
 const SECTIONS = [
@@ -17,21 +17,37 @@ const SECTIONS = [
 
 export default function ScrollProgress() {
   const reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const scaleY = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const scrollable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const next = scrollable > 0 ? window.scrollY / scrollable : 0;
+      setProgress(Math.min(1, Math.max(0, next)));
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   if (reduced) return null;
 
   return (
     <div className="fixed right-4 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col items-center gap-3">
-      {/* Progress line */}
       <div className="relative w-px h-40 bg-white/10">
-        <motion.div
-          style={{ scaleY, transformOrigin: "top" }}
+        <div
+          style={{ transform: `scaleY(${progress})`, transformOrigin: "top" }}
           className="absolute inset-0 bg-accent-blue"
         />
       </div>
-      {/* Section dots */}
+
       {SECTIONS.map((section) => (
         <a
           key={section.id}

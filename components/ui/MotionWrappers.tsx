@@ -1,11 +1,113 @@
 "use client";
 
-import { motion, type HTMLMotionProps } from "framer-motion";
+import {
+  type CSSProperties,
+  type HTMLAttributes,
+  type ReactNode,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
+import { cn, useReducedMotion } from "@/lib/utils";
 
-interface FadeInUpProps extends HTMLMotionProps<"div"> {
-  children: React.ReactNode;
+type RevealVariant = "up" | "left" | "right" | "scale" | "wipe";
+
+interface RevealProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
   delay?: number;
-  className?: string;
+  variant?: RevealVariant;
+  once?: boolean;
+}
+
+function Reveal({
+  children,
+  delay = 0,
+  variant = "up",
+  once = true,
+  className,
+  style,
+  ...props
+}: RevealProps) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reducedMotion = useReducedMotion();
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const node = ref.current;
+    setMounted(true);
+
+    if (!node || reducedMotion || !("IntersectionObserver" in window)) {
+      setVisible(true);
+      return;
+    }
+
+    let observer: IntersectionObserver | null = null;
+    let frame = 0;
+
+    const reveal = () => {
+      setVisible(true);
+      if (once) observer?.disconnect();
+    };
+
+    frame = window.requestAnimationFrame(() => {
+      const rect = node.getBoundingClientRect();
+      const viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight;
+
+      if (rect.top < viewportHeight - 64 && rect.bottom > 64) {
+        reveal();
+      }
+    });
+
+    observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          reveal();
+        } else if (!once) {
+          setVisible(false);
+        }
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.01,
+      }
+    );
+
+    observer.observe(node);
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      observer?.disconnect();
+    };
+  }, [once, reducedMotion]);
+
+  const revealStyle = {
+    "--motion-delay": `${delay}s`,
+    ...style,
+  } as CSSProperties;
+
+  return (
+    <div
+      ref={ref}
+      style={revealStyle}
+      className={cn(
+        "motion-reveal",
+        `motion-reveal--${variant}`,
+        mounted && !visible && "motion-pending",
+        visible && "is-visible",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface FadeInUpProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  delay?: number;
 }
 
 export function FadeInUp({
@@ -15,22 +117,14 @@ export function FadeInUp({
   ...props
 }: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay, ease: "easeOut" }}
-      className={className}
-      {...props}
-    >
+    <Reveal delay={delay} variant="up" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
-interface StaggerContainerProps {
-  children: React.ReactNode;
-  className?: string;
+interface StaggerContainerProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
   stagger?: number;
 }
 
@@ -38,40 +132,35 @@ export function StaggerContainer({
   children,
   className,
   stagger = 0.1,
+  style,
+  ...props
 }: StaggerContainerProps) {
   return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={{
-        hidden: {},
-        visible: { transition: { staggerChildren: stagger } },
-      }}
+    <div
       className={className}
+      style={{ "--motion-stagger": `${stagger}s`, ...style } as CSSProperties}
+      {...props}
     >
       {children}
-    </motion.div>
+    </div>
   );
+}
+
+interface StaggerItemProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  delay?: number;
 }
 
 export function StaggerItem({
   children,
   className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) {
+  delay = 0,
+  ...props
+}: StaggerItemProps) {
   return (
-    <motion.div
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-      }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="up" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -79,21 +168,12 @@ export function ScaleIn({
   children,
   delay = 0,
   className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+  ...props
+}: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.5, delay }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="scale" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -101,21 +181,12 @@ export function SlideFromLeft({
   children,
   delay = 0,
   className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+  ...props
+}: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: -60 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="left" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -123,21 +194,12 @@ export function SlideFromRight({
   children,
   delay = 0,
   className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+  ...props
+}: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, x: 60 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.6, delay, ease: "easeOut" }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="right" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -145,21 +207,12 @@ export function TextReveal({
   children,
   delay = 0,
   className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+  ...props
+}: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ clipPath: "inset(-20% 100% -20% 0)" }}
-      whileInView={{ clipPath: "inset(-20% 0% -20% 0)" }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 0.8, delay, ease: [0.77, 0, 0.175, 1] }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="wipe" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }
 
@@ -167,20 +220,11 @@ export function WipeIn({
   children,
   delay = 0,
   className,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  className?: string;
-}) {
+  ...props
+}: FadeInUpProps) {
   return (
-    <motion.div
-      initial={{ clipPath: "inset(-20% 100% -20% 0)" }}
-      whileInView={{ clipPath: "inset(-20% 0% -20% 0)" }}
-      viewport={{ once: true, margin: "-80px" }}
-      transition={{ duration: 1, delay, ease: [0.77, 0, 0.175, 1] }}
-      className={className}
-    >
+    <Reveal delay={delay} variant="wipe" className={className} {...props}>
       {children}
-    </motion.div>
+    </Reveal>
   );
 }

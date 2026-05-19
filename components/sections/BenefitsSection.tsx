@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { FlaskConical, Building, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { ArrowRight, Building, FlaskConical } from "lucide-react";
 import { useLang } from "@/lib/i18n";
 import { getContent } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
+import { FadeInUp } from "@/components/ui/MotionWrappers";
 import { cn } from "@/lib/utils";
 
 export default function BenefitsSection() {
@@ -16,28 +16,11 @@ export default function BenefitsSection() {
     { key: "enterprises" as const, icon: Building, ...BENEFITS.enterprises },
   ];
   const [activeGroup, setActiveGroup] = useState(0);
-  const sectionRef = useRef<HTMLDivElement>(null);
-
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgX = useTransform(scrollYProgress, [0, 1], ["5%", "-5%"]);
 
   return (
-    <section
-      id="loi-ich"
-      ref={sectionRef}
-      className="relative bg-black py-20 md:py-28 overflow-hidden"
-    >
-      {/* Subtle moving grid background */}
-      <motion.div
-        style={{ x: bgX }}
-        className="absolute inset-0 bg-grid opacity-30 scale-110"
-      />
+    <section id="loi-ich" className="relative bg-black py-20 md:py-28 overflow-hidden">
+      <div className="absolute inset-0 bg-grid opacity-30 scale-110 benefit-grid-drift" />
 
-      {/* Centered ambient blue glow */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
         <div className="w-[800px] h-[600px] bg-glow-blue" />
       </div>
@@ -48,7 +31,6 @@ export default function BenefitsSection() {
           subtitle={BENEFITS.sectionSubtitle}
         />
 
-        {/* Toggle tabs */}
         <div className="flex justify-center mb-14">
           <div className="inline-flex border border-white/10">
             {groups.map((group, i) => {
@@ -72,22 +54,17 @@ export default function BenefitsSection() {
           </div>
         </div>
 
-        {/* Benefit cards — animated grid */}
         <div className="grid md:grid-cols-3 gap-px bg-white/[0.06]">
           {groups[activeGroup].items.map((item, i) => (
-            <motion.div
+            <FadeInUp
               key={`${activeGroup}-${item.title}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, delay: i * 0.1 }}
+              delay={i * 0.08}
               className="group bg-black p-8 md:p-10 relative"
             >
-              {/* Large faded index */}
               <span className="absolute top-4 right-5 font-heading text-6xl font-black text-white/[0.03] leading-none select-none">
                 0{i + 1}
               </span>
 
-              {/* Blue top accent line that grows on hover */}
               <div className="h-px w-8 bg-accent-blue mb-6 group-hover:w-16 transition-all duration-500" />
 
               <h4 className="font-heading text-lg font-black text-white mb-2">
@@ -100,16 +77,12 @@ export default function BenefitsSection() {
               <span className="inline-flex items-center gap-1.5 text-accent-blue text-xs font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 {BENEFITS.learnMore} <ArrowRight size={12} />
               </span>
-            </motion.div>
+            </FadeInUp>
           ))}
         </div>
 
-        {/* Bottom stat strip */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
+        <FadeInUp
+          delay={0.2}
           className="mt-12 border-t border-white/[0.06] pt-8 flex flex-wrap justify-center gap-10 md:gap-16"
         >
           {BENEFITS.stats.map((stat) => (
@@ -122,7 +95,7 @@ export default function BenefitsSection() {
               </div>
             </div>
           ))}
-        </motion.div>
+        </FadeInUp>
       </div>
     </section>
   );

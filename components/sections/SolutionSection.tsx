@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef, useState, useEffect } from "react";
-import { motion } from "framer-motion";
 import { useLang } from "@/lib/i18n";
 import { getContent } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -71,17 +70,13 @@ export default function SolutionSection() {
                       <div className="flex gap-5">
                         {/* Step indicator */}
                         <div className="flex-shrink-0 hidden lg:flex flex-col items-center">
-                          <motion.div
-                            animate={{
-                              backgroundColor: isActive
-                                ? "#2563EB"
-                                : "rgba(255,255,255,0)",
-                              borderColor: isActive
-                                ? "#2563EB"
-                                : "rgba(255,255,255,0.15)",
-                            }}
-                            transition={{ duration: 0.4 }}
-                            className="w-10 h-10 border flex items-center justify-center font-heading font-black text-sm relative z-10"
+                          <div
+                            className={cn(
+                              "w-10 h-10 border flex items-center justify-center font-heading font-black text-sm relative z-10 transition-colors duration-400",
+                              isActive
+                                ? "bg-accent-blue border-accent-blue"
+                                : "bg-transparent border-white/15"
+                            )}
                           >
                             <span
                               className={cn(
@@ -91,7 +86,7 @@ export default function SolutionSection() {
                             >
                               0{i + 1}
                             </span>
-                          </motion.div>
+                          </div>
                         </div>
 
                         {/* Content */}

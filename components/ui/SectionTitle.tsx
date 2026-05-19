@@ -1,7 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { FadeInUp } from "@/components/ui/MotionWrappers";
 
 interface SectionTitleProps {
   title: string;
@@ -21,11 +21,7 @@ export default function SectionTitle({
   light = false,
 }: SectionTitleProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.6 }}
+    <FadeInUp
       className={cn(
         "mb-12 md:mb-16",
         align === "center" && "text-center",
@@ -62,6 +58,6 @@ export default function SectionTitle({
           {subtitle}
         </p>
       )}
-    </motion.div>
+    </FadeInUp>
   );
 }

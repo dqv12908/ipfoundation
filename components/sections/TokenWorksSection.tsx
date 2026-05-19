@@ -1,7 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { getContent } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -9,17 +8,35 @@ import { SlideFromLeft, SlideFromRight } from "@/components/ui/MotionWrappers";
 
 function TimelineLine() {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start center", "end center"],
-  });
-  const scaleY = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const node = ref.current;
+      if (!node) return;
+
+      const rect = node.getBoundingClientRect();
+      const viewportMid = window.innerHeight / 2;
+      const total = rect.height || 1;
+      const next = (viewportMid - rect.top) / total;
+      setProgress(Math.min(1, Math.max(0, next)));
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <div ref={ref} className="absolute left-1/2 top-0 bottom-0 w-px -translate-x-1/2">
       <div className="absolute inset-0 bg-white/10" />
-      <motion.div
-        style={{ scaleY, transformOrigin: "top" }}
+      <div
+        style={{ transform: `scaleY(${progress})`, transformOrigin: "top" }}
         className="absolute inset-0 bg-accent-blue"
       />
     </div>

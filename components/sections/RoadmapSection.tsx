@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useEffect, useRef, useState } from "react";
 import { useLang } from "@/lib/i18n";
 import { getContent, type Content } from "@/lib/constants";
 import SectionTitle from "@/components/ui/SectionTitle";
@@ -10,18 +9,36 @@ import { cn } from "@/lib/utils";
 
 function DesktopTimeline({ phases }: { phases: Content["ROADMAP"]["phases"] }) {
   const ref = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start center", "end center"],
-  });
-  const scaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const [progress, setProgress] = useState(0);
+
+  useEffect(() => {
+    const update = () => {
+      const node = ref.current;
+      if (!node) return;
+
+      const rect = node.getBoundingClientRect();
+      const viewportMid = window.innerHeight / 2;
+      const total = rect.height || 1;
+      const next = (viewportMid - rect.top) / total;
+      setProgress(Math.min(1, Math.max(0, next)));
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
+  }, []);
 
   return (
     <div ref={ref} className="hidden md:block">
       <div className="relative mb-20">
         <div className="h-px w-full bg-white/10" />
-        <motion.div
-          style={{ scaleX, transformOrigin: "left" }}
+        <div
+          style={{ transform: `scaleX(${progress})`, transformOrigin: "left" }}
           className="absolute inset-0 h-px bg-accent-blue"
         />
         <div className="absolute inset-0 flex justify-between">

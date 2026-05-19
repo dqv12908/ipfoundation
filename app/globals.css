@@ -176,6 +176,129 @@ body {
       inset 0 1px 0 0 rgba(255, 255, 255, 0.8),
       inset 0 -1px 0 0 rgba(0, 0, 0, 0.04);
   }
+
+  .motion-reveal {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    clip-path: inset(-20% 0 -20% 0);
+    transition:
+      opacity 520ms ease,
+      transform 620ms cubic-bezier(0.22, 1, 0.36, 1),
+      clip-path 760ms cubic-bezier(0.77, 0, 0.175, 1);
+    transition-delay: var(--motion-delay, 0s);
+    will-change: opacity, transform, clip-path;
+  }
+
+  .motion-reveal.motion-pending {
+    opacity: 0;
+  }
+
+  .motion-reveal--up.motion-pending {
+    transform: translate3d(0, 24px, 0);
+  }
+
+  .motion-reveal--left.motion-pending {
+    transform: translate3d(-44px, 0, 0);
+  }
+
+  .motion-reveal--right.motion-pending {
+    transform: translate3d(44px, 0, 0);
+  }
+
+  .motion-reveal--scale.motion-pending {
+    transform: scale(0.94);
+  }
+
+  .motion-reveal--wipe {
+    overflow: hidden;
+  }
+
+  .motion-reveal--wipe.motion-pending {
+    opacity: 1;
+    clip-path: inset(-20% 100% -20% 0);
+  }
+
+  .motion-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+    clip-path: inset(-20% 0 -20% 0);
+  }
+
+  .nav-enter {
+    animation: nav-enter 560ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .mobile-menu-panel {
+    animation: menu-fade 220ms ease both;
+  }
+
+  .mobile-menu-panel > div {
+    animation: menu-panel 320ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .tab-panel-enter {
+    animation: content-rise 260ms ease both;
+  }
+
+  .benefit-grid-drift {
+    animation: grid-drift 22s ease-in-out infinite alternate;
+  }
+
+  .ipad-shell {
+    transform-style: preserve-3d;
+    transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+}
+
+@keyframes nav-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -16px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes menu-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes menu-panel {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes content-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes grid-drift {
+  from {
+    transform: translate3d(2%, 0, 0) scale(1.08);
+  }
+  to {
+    transform: translate3d(-2%, 0, 0) scale(1.08);
+  }
 }
 
 @layer utilities {
@@ -193,5 +316,13 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .motion-reveal,
+  .motion-reveal.motion-pending,
+  .motion-reveal--wipe.motion-pending {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: inset(-20% 0 -20% 0) !important;
   }
 }

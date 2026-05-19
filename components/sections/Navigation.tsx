@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Globe } from "lucide-react";
 import Image from "next/image";
 import { useLang } from "@/lib/i18n";
@@ -72,15 +71,13 @@ export default function Navigation() {
 
   return (
     <>
-      <motion.nav
+      <nav
         id="main-nav"
-        initial={{ y: -20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         className={cn(
           "fixed top-4 left-4 right-4 z-50 mx-auto max-w-5xl",
           "transition-all duration-500 ease-out",
           "liquid-glass",
+          "nav-enter",
           scrolled && "liquid-glass-dense top-3 max-w-4xl",
           onLight && "liquid-glass-on-light"
         )}
@@ -181,74 +178,49 @@ export default function Navigation() {
             </button>
           </div>
         </div>
-      </motion.nav>
+      </nav>
 
       {/* Mobile overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-0 z-40 md:hidden"
-          >
-            <motion.div
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute inset-0 bg-black/70 backdrop-blur-3xl flex flex-col justify-center px-8"
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 md:hidden mobile-menu-panel">
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-3xl flex flex-col justify-center px-8">
+            {NAV.links.map((link) => (
+              <a
+                key={link.href}
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className="text-white text-3xl font-heading font-black py-4 border-b border-white/10 hover:text-white/70 transition-colors"
+              >
+                {link.label}
+              </a>
+            ))}
+
+            {/* Language toggle in mobile */}
+            <button
+              onClick={() => {
+                toggleLocale();
+                setMobileOpen(false);
+              }}
+              className="flex items-center gap-2 text-white/60 hover:text-white text-lg font-heading font-medium py-4 border-b border-white/10 transition-colors"
             >
-              {NAV.links.map((link, i) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + i * 0.08 }}
-                  onClick={() => setMobileOpen(false)}
-                  className="text-white text-3xl font-heading font-black py-4 border-b border-white/10 hover:text-white/70 transition-colors"
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              <Globe size={18} />
+              {locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"}
+            </button>
 
-              {/* Language toggle in mobile */}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.35 }}
+            <div className="mt-8">
+              <SharpButton
+                variant="primary"
                 onClick={() => {
-                  toggleLocale();
                   setMobileOpen(false);
+                  router.push("/launchpad");
                 }}
-                className="flex items-center gap-2 text-white/60 hover:text-white text-lg font-heading font-medium py-4 border-b border-white/10 transition-colors"
               >
-                <Globe size={18} />
-                {locale === "vi" ? "Switch to English" : "Chuyển sang Tiếng Việt"}
-              </motion.button>
-
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.4 }}
-                className="mt-8"
-              >
-                <SharpButton
-                  variant="primary"
-                  onClick={() => {
-                    setMobileOpen(false);
-                    router.push("/launchpad");
-                  }}
-                >
-                  {NAV.cta}
-                </SharpButton>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                {NAV.cta}
+              </SharpButton>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
