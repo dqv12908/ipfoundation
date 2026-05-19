@@ -267,7 +267,8 @@ body {
   }
 
   .mission-image-rail {
-    animation: mission-scroll-down 34s linear infinite;
+    animation: mission-scroll-down 16s linear infinite;
+    transform: translate3d(0, -50%, 0);
     will-change: transform;
   }
 }
@@ -358,7 +359,7 @@ body {
   }
 
   .mission-image-rail {
-    animation: none !important;
-    transform: none !important;
+    animation: mission-scroll-down 18s linear infinite !important;
+    transform: translate3d(0, -50%, 0);
   }
 }
