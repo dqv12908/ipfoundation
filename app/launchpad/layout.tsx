@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { DM_Sans, Syne } from "next/font/google";
+import { Be_Vietnam_Pro } from "next/font/google";
 import { Header } from "@/components/platform/layout/Header";
 import { AmbientBackground } from "@/components/platform/ui/AmbientBackground";
 import { Providers as PlatformProviders } from "@/lib/platform/providers";
 
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const dmSans = DM_Sans({
-  subsets: ["latin"],
-  variable: "--font-body",
+const beVietnamPro = Be_Vietnam_Pro({
+  subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-platform",
   display: "swap",
 });
 
@@ -28,7 +23,7 @@ export default function PlatformLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section lang="vi" className={`platform-shell ${syne.variable} ${dmSans.variable}`}>
+    <section lang="vi" className={`platform-shell ${beVietnamPro.variable}`}>
       <PlatformProviders>
         <AmbientBackground />
         <div className="relative z-10">
