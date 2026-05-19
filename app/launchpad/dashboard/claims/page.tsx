@@ -26,8 +26,8 @@ export default function ClaimsPage() {
   if (!isConnected) {
     return (
       <div>
-        <h1 className="mb-6 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>Claims</h1>
-        <ConnectWalletPrompt message="Connect your wallet to view claims." />
+        <h1 className="mb-6 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>Quyền nhận</h1>
+        <ConnectWalletPrompt message="Kết nối ví để xem quyền nhận token hoặc hoàn tiền." />
       </div>
     )
   }
@@ -47,10 +47,10 @@ export default function ClaimsPage() {
         <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
         </svg>
-        Back to Portfolio
+        Quay lại danh mục
       </Link>
       <h1 className="mb-6 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
-        Claims
+        Quyền nhận
       </h1>
 
       {loading ? (
@@ -59,7 +59,7 @@ export default function ClaimsPage() {
         </div>
       ) : uniqueCampaigns.size === 0 ? (
         <div className="panel py-14 text-center">
-          <p className="text-sm text-text-muted">No active campaigns to claim from.</p>
+          <p className="text-sm text-text-muted">Chưa có chiến dịch nào có thể nhận quyền.</p>
         </div>
       ) : (
         <div className="space-y-5">

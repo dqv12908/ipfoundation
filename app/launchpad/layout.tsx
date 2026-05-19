@@ -17,9 +17,9 @@ const dmSans = DM_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "IP Foundation Launchpad - Tokenized Intellectual Property",
+  title: "IP Foundation Launchpad - Huy động vốn IP mã hóa",
   description:
-    "The IP Foundation launchpad for tokenized inventions, scientific IP, and IP-backed fundraising.",
+    "Launchpad của IP Foundation dành cho sáng chế, tài sản trí tuệ khoa học và chiến dịch huy động vốn IP mã hóa.",
 };
 
 export default function PlatformLayout({
@@ -28,7 +28,7 @@ export default function PlatformLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section className={`platform-shell ${syne.variable} ${dmSans.variable}`}>
+    <section lang="vi" className={`platform-shell ${syne.variable} ${dmSans.variable}`}>
       <PlatformProviders>
         <AmbientBackground />
         <div className="relative z-10">

@@ -62,13 +62,13 @@ export function AllocationDisplay({
 
   return (
     <div className="panel p-5 animate-slide-up">
-      <p className="label-caps mb-3">Your Allocation</p>
+      <p className="label-caps mb-3">Phân bổ của bạn</p>
 
       <dl className="space-y-2.5 text-sm">
         {[
-          { label: 'Commitment', value: formatRaise(commitment.toString()), color: '' },
-          { label: 'Accepted', value: formatRaise(accepted.toString()), color: 'text-positive' },
-          { label: 'Tokens', value: `${formatTokens(tokens.toString())} tokens`, color: 'text-accent' },
+          { label: 'Đã cam kết', value: formatRaise(commitment.toString()), color: '' },
+          { label: 'Được nhận', value: formatRaise(accepted.toString()), color: 'text-positive' },
+          { label: 'Token', value: `${formatTokens(tokens.toString())} token`, color: 'text-accent' },
         ].map((item) => (
           <div key={item.label} className="flex justify-between">
             <dt className="text-text-muted">{item.label}</dt>
@@ -77,7 +77,7 @@ export function AllocationDisplay({
         ))}
         {refund > 0n && (
           <div className="flex justify-between">
-            <dt className="text-text-muted">Refund</dt>
+            <dt className="text-text-muted">Hoàn tiền</dt>
             <dd className="font-semibold tabular-nums text-caution">{formatRaise(refund.toString())}</dd>
           </div>
         )}
@@ -97,7 +97,7 @@ export function AllocationDisplay({
                 })
               }
             >
-              Claim Tokens
+              Nhận token
             </TransactionButton>
           )}
           {tokensClaimed && (
@@ -105,7 +105,7 @@ export function AllocationDisplay({
               <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              Tokens claimed
+              Đã nhận token
             </div>
           )}
 
@@ -121,7 +121,7 @@ export function AllocationDisplay({
                 })
               }
             >
-              Claim Refund ({formatRaise(refund.toString())})
+              Nhận hoàn tiền ({formatRaise(refund.toString())})
             </TransactionButton>
           )}
           {refundClaimed && (
@@ -129,7 +129,7 @@ export function AllocationDisplay({
               <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
               </svg>
-              Refund claimed
+              Đã nhận hoàn tiền
             </div>
           )}
         </div>
@@ -137,7 +137,7 @@ export function AllocationDisplay({
 
       {!finalized && (
         <p className="mt-3 text-[0.6875rem] text-text-muted">
-          Estimated allocation. Final values confirmed after campaign settlement.
+          Đây là phân bổ ước tính. Giá trị cuối cùng được xác nhận sau khi chiến dịch quyết toán.
         </p>
       )}
     </div>

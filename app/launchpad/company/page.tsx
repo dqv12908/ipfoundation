@@ -38,19 +38,19 @@ export default function CompanyPage() {
             className="text-xl font-bold"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            {company?.name ?? 'Company Portal'}
+            {company?.name ?? 'Cổng doanh nghiệp'}
           </h1>
           <p className="mt-0.5 text-xs text-text-muted">
-            Signed in as{' '}
+            Đăng nhập với mã{' '}
             <span className="text-accent">{company?.companyId}</span>
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/launchpad/company/campaigns/new" className="btn-primary text-sm">
-            Create Campaign
+            Tạo chiến dịch
           </Link>
           <button onClick={logout} className="btn-secondary text-sm">
-            Sign Out
+            Đăng xuất
           </button>
         </div>
       </div>
@@ -78,13 +78,13 @@ export default function CompanyPage() {
             />
           </svg>
           <p className="text-sm text-text-secondary">
-            No campaigns created yet.
+            Chưa có chiến dịch nào.
           </p>
           <Link
             href="/launchpad/company/campaigns/new"
             className="btn-primary mt-4 inline-block text-sm"
           >
-            Create your first campaign
+            Tạo chiến dịch đầu tiên
           </Link>
         </div>
       ) : (

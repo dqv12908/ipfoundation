@@ -42,11 +42,11 @@ export function CampaignCard({ campaign, index = 0 }: { campaign: ApiCampaign; i
 
         <div className="mb-3 grid grid-cols-2 gap-2">
           <div className="rounded-lg bg-white/[0.025] px-3 py-2">
-            <p className="text-[0.625rem] font-medium text-text-muted">Min Raise</p>
+            <p className="text-[0.625rem] font-medium text-text-muted">Tối thiểu</p>
             <p className="mt-0.5 text-sm font-semibold tabular-nums">{formatRaise(campaign.minRaise)}</p>
           </div>
           <div className="rounded-lg bg-white/[0.025] px-3 py-2">
-            <p className="text-[0.625rem] font-medium text-text-muted">Max Raise</p>
+            <p className="text-[0.625rem] font-medium text-text-muted">Tối đa</p>
             <p className="mt-0.5 text-sm font-semibold tabular-nums">{formatRaise(campaign.maxRaise)}</p>
           </div>
         </div>
@@ -54,7 +54,7 @@ export function CampaignCard({ campaign, index = 0 }: { campaign: ApiCampaign; i
         <ProgressBar percent={progress} />
 
         <div className="mt-2.5 flex items-center justify-between text-xs text-text-muted">
-          <span className="tabular-nums">{formatRaise(campaign.totalCommitted)} raised</span>
+          <span className="tabular-nums">Đã góp {formatRaise(campaign.totalCommitted)}</span>
           <span className="flex items-center gap-1 tabular-nums">
             <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128H5.228A2 2 0 013 17.208V14.5a2 2 0 012-2h.5M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07m0 0A5.5 5.5 0 009 7.5a5.5 5.5 0 00-4.786 8.558m9.572 0H5.5" />

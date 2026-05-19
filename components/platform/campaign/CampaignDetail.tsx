@@ -72,19 +72,19 @@ export function CampaignDetail({ campaign }: { campaign: ApiCampaign }) {
 
           {/* Raise progress */}
           <div className="panel p-5">
-            <p className="label-caps mb-4">Raise Progress</p>
-            <ProgressBar percent={progress} label="Funded" />
+            <p className="label-caps mb-4">Tiến độ gọi vốn</p>
+            <ProgressBar percent={progress} label="Đã góp" />
             <div className="mt-4 grid grid-cols-3 gap-3">
               <div className="rounded-lg bg-white/[0.025] p-3">
-                <p className="text-[0.625rem] font-medium text-text-muted">Raised</p>
+                <p className="text-[0.625rem] font-medium text-text-muted">Đã góp</p>
                 <p className="mt-1 text-base font-bold tabular-nums text-positive">{formatRaise(liveTotal)}</p>
               </div>
               <div className="rounded-lg bg-white/[0.025] p-3">
-                <p className="text-[0.625rem] font-medium text-text-muted">Min Raise</p>
+                <p className="text-[0.625rem] font-medium text-text-muted">Tối thiểu</p>
                 <p className="mt-1 text-sm font-semibold tabular-nums">{formatRaise(campaign.minRaise)}</p>
               </div>
               <div className="rounded-lg bg-white/[0.025] p-3">
-                <p className="text-[0.625rem] font-medium text-text-muted">Max Raise</p>
+                <p className="text-[0.625rem] font-medium text-text-muted">Tối đa</p>
                 <p className="mt-1 text-sm font-semibold tabular-nums">{formatRaise(campaign.maxRaise)}</p>
               </div>
             </div>
@@ -92,15 +92,15 @@ export function CampaignDetail({ campaign }: { campaign: ApiCampaign }) {
 
           {/* Details grid */}
           <div className="panel p-5">
-            <p className="label-caps mb-4">Campaign Details</p>
+            <p className="label-caps mb-4">Chi tiết chiến dịch</p>
             <dl className="grid grid-cols-2 gap-4 text-sm">
               {[
-                { label: 'Token Price', value: formatRaise(campaign.tokenPrice) },
-                { label: 'Accepted Asset', value: isETH ? 'ETH' : shortAddress(campaign.acceptedAsset) },
-                { label: 'Start', value: formatDate(campaign.startTime) },
-                { label: 'End', value: formatDate(campaign.endTime) },
-                { label: 'Company', value: shortAddress(campaign.company), mono: true },
-                { label: 'Contract', value: shortAddress(campaign.contractAddress), mono: true },
+                { label: 'Giá token', value: formatRaise(campaign.tokenPrice) },
+                { label: 'Tài sản nhận góp', value: isETH ? 'ETH' : shortAddress(campaign.acceptedAsset) },
+                { label: 'Bắt đầu', value: formatDate(campaign.startTime) },
+                { label: 'Kết thúc', value: formatDate(campaign.endTime) },
+                { label: 'Doanh nghiệp', value: shortAddress(campaign.company), mono: true },
+                { label: 'Hợp đồng', value: shortAddress(campaign.contractAddress), mono: true },
               ].map((item) => (
                 <div key={item.label}>
                   <dt className="text-xs text-text-muted">{item.label}</dt>

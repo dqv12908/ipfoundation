@@ -9,12 +9,12 @@ import type { ApiCampaign, PaginatedResponse } from '@/lib/platform/api'
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 const filters = [
-  { value: '', label: 'All' },
-  { value: 'APPROVED', label: 'Upcoming' },
-  { value: 'LIVE', label: 'Live' },
-  { value: 'ENDED', label: 'Ended' },
-  { value: 'FINALIZED_SUCCESS', label: 'Successful' },
-  { value: 'FINALIZED_FAIL', label: 'Failed' },
+  { value: '', label: 'Tất cả' },
+  { value: 'APPROVED', label: 'Sắp mở' },
+  { value: 'LIVE', label: 'Đang gọi vốn' },
+  { value: 'ENDED', label: 'Đã kết thúc' },
+  { value: 'FINALIZED_SUCCESS', label: 'Thành công' },
+  { value: 'FINALIZED_FAIL', label: 'Thất bại' },
 ]
 
 export default function ExplorePage() {
@@ -29,7 +29,7 @@ export default function ExplorePage() {
     const params = status ? `?status=${status}` : ''
     fetch(`${API_URL}/api/campaigns${params}`)
       .then((r) => {
-        if (!r.ok) throw new Error(`API returned ${r.status}`)
+        if (!r.ok) throw new Error(`API trả về mã ${r.status}`)
         return r.json() as Promise<PaginatedResponse<ApiCampaign>>
       })
       .then((data) => setCampaigns(data.items))
@@ -43,22 +43,20 @@ export default function ExplorePage() {
 
   return (
     <div>
-      {/* Hero */}
       <div className="mb-12 pt-10 animate-fade-in">
-        <p className="label-caps mb-3 tracking-widest text-accent">Tokenized IP Fundraising</p>
+        <p className="label-caps mb-3 tracking-widest text-accent">Huy động vốn IP mã hóa</p>
         <h1
           className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          Invest in Ideas,<br />
-          <span className="accent-text">Before the World Does.</span>
+          Đầu tư vào ý tưởng,<br />
+          <span className="accent-text">trước khi thế giới nhận ra.</span>
         </h1>
         <p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-text-secondary">
-          Commit capital to IP-backed campaigns. Smart contract escrow.
-          Binary outcomes. Fully non-custodial.
+          Cam kết vốn vào các chiến dịch được bảo chứng bằng tài sản trí tuệ.
+          Vốn được khóa bằng hợp đồng thông minh, kết quả nhị phân, hoàn toàn không lưu ký.
         </p>
 
-        {/* Stats row */}
         <div className="mt-8 flex items-center gap-6">
           <div>
             <p
@@ -67,7 +65,7 @@ export default function ExplorePage() {
             >
               {campaigns.length}
             </p>
-            <p className="text-xs text-text-muted">Campaigns</p>
+            <p className="text-xs text-text-muted">Chiến dịch</p>
           </div>
           <div className="h-6 w-px bg-border" />
           <div>
@@ -77,7 +75,7 @@ export default function ExplorePage() {
             >
               100%
             </p>
-            <p className="text-xs text-text-muted">On-Chain</p>
+            <p className="text-xs text-text-muted">On-chain</p>
           </div>
           <div className="h-6 w-px bg-border" />
           <div>
@@ -87,12 +85,11 @@ export default function ExplorePage() {
             >
               Sepolia
             </p>
-            <p className="text-xs text-text-muted">Testnet</p>
+            <p className="text-xs text-text-muted">Mạng thử nghiệm</p>
           </div>
         </div>
       </div>
 
-      {/* Filter pills */}
       <div className="mb-8 flex flex-wrap items-center gap-1.5 animate-slide-up stagger-2">
         {filters.map((f) => (
           <button
@@ -109,7 +106,6 @@ export default function ExplorePage() {
         ))}
       </div>
 
-      {/* Content */}
       {error ? (
         <ErrorMessage message={error} retry={fetchCampaigns} />
       ) : loading ? (
@@ -123,9 +119,9 @@ export default function ExplorePage() {
           <svg className="mb-3 h-8 w-8 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
           </svg>
-          <p className="text-sm font-medium text-text-secondary">No campaigns found</p>
+          <p className="text-sm font-medium text-text-secondary">Chưa có chiến dịch phù hợp</p>
           <p className="mt-1 text-xs text-text-muted">
-            {status ? 'Try a different filter' : 'Check back soon for new launches'}
+            {status ? 'Thử một bộ lọc khác' : 'Quay lại sau để xem các đợt mở bán mới'}
           </p>
         </div>
       ) : (
@@ -136,14 +132,13 @@ export default function ExplorePage() {
         </div>
       )}
 
-      {/* How it works */}
       <div className="mt-20 animate-slide-up">
-        <p className="label-caps mb-6 tracking-widest">The Protocol</p>
+        <p className="label-caps mb-6 tracking-widest">Cơ chế hoạt động</p>
         <div className="grid gap-5 sm:grid-cols-3">
           {[
-            { num: '01', title: 'Create', desc: 'Companies submit IP-backed campaigns with clear fundraising parameters and timeline.' },
-            { num: '02', title: 'Fund', desc: 'Commit ETH during the live window. All capital secured by smart contract escrow.' },
-            { num: '03', title: 'Settle', desc: 'Min raise met — tokens distributed. Not met — full refund. Binary outcome, no ambiguity.' },
+            { num: '01', title: 'Tạo chiến dịch', desc: 'Doanh nghiệp gửi chiến dịch IP với mục tiêu vốn, giá token và lịch gọi vốn rõ ràng.' },
+            { num: '02', title: 'Góp vốn', desc: 'Nhà đầu tư cam kết ETH trong thời gian mở bán. Toàn bộ vốn được giữ trong escrow on-chain.' },
+            { num: '03', title: 'Quyết toán', desc: 'Đạt mức tối thiểu thì phân phối token. Không đạt thì hoàn tiền đầy đủ. Kết quả rõ ràng, không mập mờ.' },
           ].map((step, i) => (
             <div
               key={step.num}

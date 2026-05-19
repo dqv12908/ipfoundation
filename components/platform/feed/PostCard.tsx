@@ -11,14 +11,14 @@ function timeAgo(dateStr: string): string {
   const then = new Date(dateStr).getTime()
   const seconds = Math.floor((now - then) / 1000)
 
-  if (seconds < 60) return 'just now'
+  if (seconds < 60) return 'vừa xong'
   const minutes = Math.floor(seconds / 60)
-  if (minutes < 60) return `${minutes}m ago`
+  if (minutes < 60) return `${minutes} phút trước`
   const hours = Math.floor(minutes / 60)
-  if (hours < 24) return `${hours}h ago`
+  if (hours < 24) return `${hours} giờ trước`
   const days = Math.floor(hours / 24)
-  if (days < 30) return `${days}d ago`
-  return new Date(dateStr).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })
+  if (days < 30) return `${days} ngày trước`
+  return new Date(dateStr).toLocaleDateString('vi-VN', { month: 'short', day: 'numeric' })
 }
 
 interface PostCardProps {
@@ -48,7 +48,7 @@ export function PostCard({ post, follower, isFollowing, onFollowToggle }: PostCa
                   className="truncate text-sm font-bold group-hover:text-accent transition-colors"
                   style={{ fontFamily: 'var(--font-display)' }}
                 >
-                  {post.campaign?.name ?? 'Unknown'}
+                  {post.campaign?.name ?? 'Không rõ'}
                 </span>
                 {post.campaign?.status && (
                   <StatusBadge status={post.campaign.status} />

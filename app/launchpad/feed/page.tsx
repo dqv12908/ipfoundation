@@ -14,7 +14,7 @@ type Tab = 'global' | 'invested' | 'following'
 const tabs: { value: Tab; label: string; icon: React.ReactNode; requiresWallet: boolean }[] = [
   {
     value: 'global',
-    label: 'Global',
+    label: 'Toàn bộ',
     requiresWallet: false,
     icon: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -24,7 +24,7 @@ const tabs: { value: Tab; label: string; icon: React.ReactNode; requiresWallet: 
   },
   {
     value: 'invested',
-    label: 'Invested',
+    label: 'Đã đầu tư',
     requiresWallet: true,
     icon: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -34,7 +34,7 @@ const tabs: { value: Tab; label: string; icon: React.ReactNode; requiresWallet: 
   },
   {
     value: 'following',
-    label: 'Following',
+    label: 'Đang theo dõi',
     requiresWallet: true,
     icon: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
@@ -73,7 +73,7 @@ export default function FeedPage() {
     if (address) params.set('investor', address.toLowerCase())
     fetch(`${API_URL}/api/posts?${params}`)
       .then((r) => {
-        if (!r.ok) throw new Error(`API returned ${r.status}`)
+        if (!r.ok) throw new Error(`API trả về mã ${r.status}`)
         return r.json() as Promise<PaginatedResponse<ApiPost>>
       })
       .then((data) => setPosts(data.items))
@@ -100,15 +100,15 @@ export default function FeedPage() {
     <div className="animate-fade-in">
       {/* Header */}
       <div className="mb-8 pt-4">
-        <p className="label-caps mb-3 tracking-widest text-accent">Community</p>
+        <p className="label-caps mb-3 tracking-widest text-accent">Cộng đồng</p>
         <h1
           className="text-3xl font-extrabold tracking-tight sm:text-4xl"
           style={{ fontFamily: 'var(--font-display)' }}
         >
-          Feed
+          Bảng tin
         </h1>
         <p className="mt-2 text-sm text-text-secondary">
-          Updates from IP campaigns — follow teams, track your investments.
+          Cập nhật từ các chiến dịch IP, theo dõi đội ngũ và khoản đầu tư của bạn.
         </p>
       </div>
 
@@ -135,8 +135,8 @@ export default function FeedPage() {
         <ConnectWalletPrompt
           message={
             activeTab === 'invested'
-              ? 'Connect your wallet to see updates from campaigns you invested in.'
-              : 'Connect your wallet to see updates from companies you follow.'
+              ? 'Kết nối ví để xem cập nhật từ các chiến dịch bạn đã đầu tư.'
+              : 'Kết nối ví để xem cập nhật từ các doanh nghiệp bạn đang theo dõi.'
           }
         />
       ) : error ? (
@@ -176,17 +176,17 @@ export default function FeedPage() {
           </svg>
           <p className="text-sm font-medium text-text-secondary">
             {activeTab === 'global'
-              ? 'No updates yet'
+              ? 'Chưa có cập nhật'
               : activeTab === 'invested'
-                ? 'No updates from your invested campaigns'
-                : 'No updates from companies you follow'}
+                ? 'Chưa có cập nhật từ chiến dịch bạn đã đầu tư'
+                : 'Chưa có cập nhật từ doanh nghiệp bạn theo dõi'}
           </p>
           <p className="mt-1 text-xs text-text-muted">
             {activeTab === 'global'
-              ? 'Check back soon — companies will post progress updates here.'
+              ? 'Quay lại sau, doanh nghiệp sẽ đăng tiến độ tại đây.'
               : activeTab === 'invested'
-                ? 'Invest in campaigns to see their updates here.'
-                : 'Follow companies from the Global feed to see their updates here.'}
+                ? 'Đầu tư vào chiến dịch để xem cập nhật tại đây.'
+                : 'Theo dõi doanh nghiệp từ bảng tin toàn bộ để xem cập nhật tại đây.'}
           </p>
         </div>
       ) : (

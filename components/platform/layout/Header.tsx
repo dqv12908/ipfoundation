@@ -7,10 +7,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
-  { href: '/launchpad', label: 'Explore' },
-  { href: '/launchpad/feed', label: 'Feed' },
-  { href: '/launchpad/dashboard', label: 'Portfolio' },
-  { href: '/launchpad/company', label: 'Company' },
+  { href: '/launchpad', label: 'Khám phá' },
+  { href: '/launchpad/feed', label: 'Bảng tin' },
+  { href: '/launchpad/dashboard', label: 'Danh mục' },
+  { href: '/launchpad/company', label: 'Doanh nghiệp' },
 ]
 
 export function Header() {
@@ -53,7 +53,7 @@ export function Header() {
             className="hidden border-l border-white/15 pl-3 text-[0.6875rem] font-semibold uppercase text-text-secondary sm:block"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Launchpad
+            Bệ phóng IP
           </span>
         </Link>
 
@@ -83,7 +83,7 @@ export function Header() {
         {/* Right section */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:block [&_button]:!rounded-lg [&_button]:!text-sm [&_button]:!font-medium">
-            <ConnectKitButton />
+            <ConnectKitButton label="Kết nối ví" />
           </div>
 
           {/* Mobile hamburger */}
@@ -140,7 +140,7 @@ export function Header() {
             )
           })}
           <div className="pt-2">
-            <ConnectKitButton />
+            <ConnectKitButton label="Kết nối ví" />
           </div>
         </nav>
       </div>

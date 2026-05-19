@@ -25,9 +25,9 @@ export default function AdminPage() {
     return (
       <div>
         <h1 className="mb-6 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
-          Admin Dashboard
+          Bảng quản trị
         </h1>
-        <ConnectWalletPrompt message="Connect your admin wallet to access the dashboard." />
+        <ConnectWalletPrompt message="Kết nối ví quản trị để truy cập bảng điều khiển." />
       </div>
     )
   }
@@ -35,33 +35,33 @@ export default function AdminPage() {
   return (
     <div className="animate-fade-in">
       <h1 className="mb-8 text-xl font-bold" style={{ fontFamily: 'var(--font-display)' }}>
-        Admin Dashboard
+        Bảng quản trị
       </h1>
 
       <div className="mb-8 grid gap-4 sm:grid-cols-3">
         <div className="panel p-5">
-          <p className="text-xs text-text-muted">Total Campaigns</p>
+          <p className="text-xs text-text-muted">Tổng chiến dịch</p>
           <p className="mt-2 text-2xl font-bold tabular-nums" style={{ fontFamily: 'var(--font-display)' }}>
             {campaignCount?.toString() ?? '—'}
           </p>
         </div>
         <div className="panel p-5">
-          <p className="text-xs text-text-muted">Platform Status</p>
+          <p className="text-xs text-text-muted">Trạng thái nền tảng</p>
           <p className={`mt-2 text-lg font-bold ${paused ? 'text-negative' : 'text-positive'}`}>
-            {paused === undefined ? '—' : paused ? 'Paused' : 'Active'}
+            {paused === undefined ? '—' : paused ? 'Tạm dừng' : 'Hoạt động'}
           </p>
         </div>
         <div className="panel p-5">
-          <p className="mb-3 text-xs text-text-muted">Quick Actions</p>
+          <p className="mb-3 text-xs text-text-muted">Thao tác nhanh</p>
           <div className="flex flex-col gap-2">
             <Link href="/launchpad/admin/campaigns" className="btn-secondary text-center text-sm">
-              Review Queue
+              Hàng chờ duyệt
             </Link>
             <Link href="/launchpad/admin/companies" className="btn-secondary text-center text-sm">
-              Company Accounts
+              Tài khoản doanh nghiệp
             </Link>
             <Link href="/launchpad/admin/controls" className="btn-secondary text-center text-sm">
-              Emergency Controls
+              Điều khiển khẩn cấp
             </Link>
           </div>
         </div>
