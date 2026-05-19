@@ -17,7 +17,8 @@ export const config = createConfig(
           ),
         },
     walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID ?? '',
-    appName: 'IP Platform',
-    appDescription: 'IP Tokenization Launchpad on Ethereum',
+    appName: 'IP Foundation Launchpad',
+    appDescription: 'Tokenized IP fundraising by IP Foundation',
+    appIcon: '/images/icon.ico',
   }),
 )

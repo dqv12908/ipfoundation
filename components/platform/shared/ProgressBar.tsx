@@ -43,8 +43,8 @@ export function ProgressBar({ percent, label }: { percent: number; label?: strin
           style={{
             width: `${width}%`,
             background: isOversubscribed
-              ? 'linear-gradient(90deg, #C9A84C, #F5A623)'
-              : 'linear-gradient(90deg, #C9A84C, #D4B35C)',
+              ? 'linear-gradient(90deg, #2563EB, #FFB800)'
+              : 'linear-gradient(90deg, #2563EB, #60A5FA)',
           }}
         />
       </div>

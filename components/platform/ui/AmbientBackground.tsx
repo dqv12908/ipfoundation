@@ -3,30 +3,24 @@
 export function AmbientBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden">
-      {/* Subtle gradient orbs */}
       <div
-        className="absolute rounded-full"
+        className="absolute inset-0"
         style={{
-          width: 700,
-          height: 700,
-          top: '-15%',
-          right: '-8%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.04) 0%, transparent 65%)',
-          animation: 'drift-1 25s ease-in-out infinite',
+          background:
+            'linear-gradient(180deg, rgba(37,99,235,0.08) 0%, rgba(37,99,235,0.025) 32%, transparent 62%)',
         }}
       />
       <div
-        className="absolute rounded-full"
+        className="absolute inset-0"
         style={{
-          width: 500,
-          height: 500,
-          bottom: '-8%',
-          left: '-5%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.025) 0%, transparent 65%)',
-          animation: 'drift-2 30s ease-in-out infinite',
+          backgroundImage:
+            'linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px)',
+          backgroundPosition: 'center top',
+          backgroundSize: '80px 80px',
+          maskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 68%)',
+          WebkitMaskImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7), transparent 68%)',
         }}
       />
-      {/* Subtle noise overlay */}
       <div
         className="absolute inset-0 opacity-[0.015]"
         style={{

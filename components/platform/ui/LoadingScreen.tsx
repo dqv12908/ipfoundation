@@ -31,7 +31,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
           width: 320,
           height: 320,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%)',
+          background: 'radial-gradient(circle, rgba(37,99,235,0.12) 0%, transparent 70%)',
           animation: 'loader-glow-pulse 3s ease-in-out infinite',
         }}
       />
@@ -50,7 +50,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="100"
-            stroke="rgba(201,168,76,0.08)"
+            stroke="rgba(37,99,235,0.1)"
             strokeWidth="1"
             fill="none"
           />
@@ -59,7 +59,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="100"
-            stroke="url(#gold-gradient)"
+            stroke="url(#brand-gradient)"
             strokeWidth="1.5"
             fill="none"
             strokeDasharray="628"
@@ -78,7 +78,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
                 cx={cx}
                 cy={cy}
                 r="2"
-                fill="#C9A84C"
+                fill="#2563EB"
                 style={{
                   transformOrigin: `${cx}px ${cy}px`,
                   animation: `loader-node 2s ease-in-out ${i * 0.33}s infinite`,
@@ -94,7 +94,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="72"
-            stroke="rgba(201,168,76,0.06)"
+            stroke="rgba(37,99,235,0.08)"
             strokeWidth="0.75"
             fill="none"
           />
@@ -103,7 +103,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="72"
-            stroke="rgba(201,168,76,0.2)"
+            stroke="rgba(37,99,235,0.24)"
             strokeWidth="1"
             fill="none"
             strokeDasharray="8 16"
@@ -120,7 +120,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
                 cx={cx}
                 cy={cy}
                 r="1.5"
-                fill="#C9A84C"
+                fill="#2563EB"
                 style={{
                   transformOrigin: `${cx}px ${cy}px`,
                   animation: `loader-node 1.8s ease-in-out ${i * 0.45}s infinite`,
@@ -136,7 +136,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="44"
-            stroke="rgba(201,168,76,0.04)"
+            stroke="rgba(37,99,235,0.06)"
             strokeWidth="0.5"
             fill="none"
           />
@@ -144,7 +144,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
             cx="110"
             cy="110"
             r="44"
-            stroke="rgba(201,168,76,0.15)"
+            stroke="rgba(37,99,235,0.18)"
             strokeWidth="1"
             fill="none"
             strokeDasharray="4 24"
@@ -161,7 +161,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
                 cx={cx}
                 cy={cy}
                 r="1.5"
-                fill="#C9A84C"
+                fill="#2563EB"
                 style={{
                   transformOrigin: `${cx}px ${cy}px`,
                   animation: `loader-node 1.5s ease-in-out ${i * 0.5}s infinite`,
@@ -185,7 +185,7 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
               y1={y1}
               x2={x2}
               y2={y2}
-              stroke="rgba(201,168,76,0.15)"
+              stroke="rgba(37,99,235,0.18)"
               strokeWidth="0.5"
               strokeDasharray="100"
               style={{ animation: `loader-line-trace 2.5s ease-in-out ${i * 0.6}s infinite` }}
@@ -194,11 +194,11 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
         })}
 
         <defs>
-          <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#C9A84C" stopOpacity="0" />
-            <stop offset="40%" stopColor="#C9A84C" stopOpacity="0.6" />
-            <stop offset="60%" stopColor="#E8D08A" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#C9A84C" stopOpacity="0" />
+          <linearGradient id="brand-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#2563EB" stopOpacity="0" />
+            <stop offset="40%" stopColor="#2563EB" stopOpacity="0.72" />
+            <stop offset="60%" stopColor="#93C5FD" stopOpacity="0.86" />
+            <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
           </linearGradient>
         </defs>
       </svg>
@@ -207,10 +207,10 @@ export function LoadingScreen({ message = 'Loading' }: LoadingScreenProps) {
       <div
         className="relative flex h-16 w-16 items-center justify-center rounded-2xl"
         style={{
-          background: 'linear-gradient(135deg, rgba(201,168,76,0.12), rgba(201,168,76,0.04))',
-          border: '1px solid rgba(201,168,76,0.15)',
+          background: 'linear-gradient(135deg, rgba(37,99,235,0.16), rgba(37,99,235,0.05))',
+          border: '1px solid rgba(37,99,235,0.22)',
           animation: 'loader-monogram 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both',
-          boxShadow: '0 0 40px rgba(201,168,76,0.08), inset 0 1px 0 rgba(255,255,255,0.04)',
+          boxShadow: '0 0 40px rgba(37,99,235,0.14), inset 0 1px 0 rgba(255,255,255,0.05)',
         }}
       >
         <span
@@ -266,7 +266,7 @@ export function LoadingSpinner({ size = 32 }: { size?: number }) {
           cx={size / 2}
           cy={size / 2}
           r={r}
-          stroke="rgba(201,168,76,0.1)"
+          stroke="rgba(37,99,235,0.14)"
           strokeWidth={strokeW}
           fill="none"
         />
@@ -274,7 +274,7 @@ export function LoadingSpinner({ size = 32 }: { size?: number }) {
           cx={size / 2}
           cy={size / 2}
           r={r}
-          stroke="#C9A84C"
+          stroke="#2563EB"
           strokeWidth={strokeW}
           fill="none"
           strokeDasharray={`${r * 1.2} ${r * 5}`}

@@ -66,7 +66,7 @@ export function CommitPanel({
   }
 
   return (
-    <div className="panel p-5" style={{ borderColor: 'rgba(201,168,76,0.12)' }}>
+    <div className="panel p-5" style={{ borderColor: 'rgba(37,99,235,0.18)' }}>
       <p className="label-caps mb-3">Commit Funds</p>
       <div className="mb-4">
         <label className="mb-1.5 block text-xs text-text-secondary">

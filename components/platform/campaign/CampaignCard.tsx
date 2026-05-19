@@ -17,7 +17,7 @@ const glowColors: Record<string, string> = {
 
 export function CampaignCard({ campaign, index = 0 }: { campaign: ApiCampaign; index?: number }) {
   const progress = campaignProgress(campaign.totalCommitted, campaign.maxRaise)
-  const glowColor = glowColors[campaign.status] ?? 'rgba(201,168,76,0.06)'
+  const glowColor = glowColors[campaign.status] ?? 'rgba(37,99,235,0.08)'
 
   return (
     <Link href={`/launchpad/campaigns/${campaign.onChainId}`} className="block">

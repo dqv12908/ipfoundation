@@ -12,7 +12,7 @@ interface GlowCardProps {
 export function GlowCard({
   children,
   className = '',
-  glowColor = 'rgba(201,168,76,0.06)',
+  glowColor = 'rgba(37,99,235,0.08)',
   style,
 }: GlowCardProps) {
   const cardRef = useRef<HTMLDivElement>(null)
@@ -28,7 +28,7 @@ export function GlowCard({
     const y = e.clientY - rect.top
 
     card.style.transform = 'scale(1.01)'
-    card.style.borderColor = 'rgba(255,255,255,0.1)'
+    card.style.borderColor = 'rgba(37,99,235,0.34)'
     glow.style.opacity = '1'
     glow.style.background = `radial-gradient(400px circle at ${x}px ${y}px, ${glowColor}, transparent 60%)`
   }, [glowColor])
@@ -39,14 +39,14 @@ export function GlowCard({
     if (!card || !glow) return
 
     card.style.transform = 'scale(1)'
-    card.style.borderColor = 'rgba(255,255,255,0.06)'
+    card.style.borderColor = 'rgba(255,255,255,0.08)'
     glow.style.opacity = '0'
   }, [])
 
   return (
     <div
       ref={cardRef}
-      className={`relative overflow-hidden rounded-xl border border-border bg-surface-card transition-all duration-300 ease-out ${className}`}
+      className={`relative overflow-hidden rounded-lg border border-border bg-surface-card transition-all duration-300 ease-out ${className}`}
       style={{ ...style, willChange: 'transform' }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { ConnectKitButton } from 'connectkit'
+import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
@@ -39,12 +40,17 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
         {/* Logo */}
-        <Link href="/launchpad" className="group flex items-center gap-2.5">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-surface transition-transform duration-200 group-hover:scale-105">
-            IP
-          </div>
+        <Link href="/" className="group flex items-center gap-3" aria-label="IP Foundation">
+          <Image
+            src="/images/whitetextnobg.png"
+            alt="IP Foundation"
+            width={150}
+            height={48}
+            priority
+            className="h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
+          />
           <span
-            className="hidden text-[0.9375rem] font-semibold tracking-tight sm:block"
+            className="hidden border-l border-white/15 pl-3 text-[0.6875rem] font-semibold uppercase text-text-secondary sm:block"
             style={{ fontFamily: 'var(--font-display)' }}
           >
             Launchpad
