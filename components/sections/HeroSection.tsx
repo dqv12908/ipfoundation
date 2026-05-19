@@ -9,14 +9,14 @@ import { FadeInUp, TextReveal } from "@/components/ui/MotionWrappers";
 const copy = {
   vi: {
     eyebrow: "IP Foundation",
-    title: "Ý tưởng Việt. Vốn toàn cầu.",
+    title: ["Ý TƯỞNG VIỆT", "VỐN TOÀN CẦU"],
     body: "Launchpad cho sáng chế, nghiên cứu và tài sản trí tuệ có khả năng thương mại hóa.",
     primary: "Mở Launchpad",
     secondary: "Đưa IP lên nền tảng",
   },
   en: {
     eyebrow: "IP Foundation",
-    title: "Vietnamese ideas. Global capital.",
+    title: ["VIETNAMESE IDEAS", "GLOBAL CAPITAL"],
     body: "A launchpad for inventions, research, and commercially ready intellectual property.",
     primary: "Open Launchpad",
     secondary: "Submit IP",
@@ -58,7 +58,11 @@ export default function HeroSection() {
           <div className="mt-8">
             <TextReveal>
               <h1 className="font-heading text-5xl font-black leading-[0.92] tracking-tight sm:text-7xl lg:text-8xl">
-                {hero.title}
+                {hero.title.map((line) => (
+                  <span key={line} className="block">
+                    {line}
+                  </span>
+                ))}
               </h1>
             </TextReveal>
           </div>
