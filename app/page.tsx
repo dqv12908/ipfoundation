@@ -1,5 +1,6 @@
 import Navigation from "@/components/sections/Navigation";
 import HeroSection from "@/components/sections/HeroSection";
+import MissionSection from "@/components/sections/MissionSection";
 import ProblemSection from "@/components/sections/ProblemSection";
 import SolutionSection from "@/components/sections/SolutionSection";
 import TokenWorksSection from "@/components/sections/TokenWorksSection";
@@ -19,6 +20,7 @@ export default function Home() {
       <ScrollProgress />
       <main>
         <HeroSection />
+        <MissionSection />
         <ProblemSection />
         <SolutionSection />
         <TokenWorksSection />
