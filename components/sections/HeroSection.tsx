@@ -47,8 +47,8 @@ export default function HeroSection() {
         <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-black via-black/55 to-transparent" />
       </div>
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-16 pt-32 sm:px-8 lg:justify-end">
-        <div className="w-full max-w-3xl lg:ml-auto">
+      <div className="relative mx-auto flex min-h-screen max-w-7xl items-center px-5 pb-16 pt-32 sm:px-8">
+        <div className="w-full max-w-3xl">
           <FadeInUp>
             <p className="font-heading text-xs font-semibold uppercase tracking-[0.42em] text-white/55">
               {hero.eyebrow}
