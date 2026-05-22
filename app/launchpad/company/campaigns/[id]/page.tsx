@@ -1,6 +1,6 @@
-﻿'use client'
+'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import { useWriteContract, useReadContract } from 'wagmi'
 import { campaignAbi } from '@/lib/platform/generated'
@@ -14,8 +14,8 @@ import type { ApiCampaign, ApiPost } from '@/lib/platform/api'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
-export default function CompanyCampaignPage({ params }: { params: { id: string } }) {
-  const { id } = params
+export default function CompanyCampaignPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const { company: companyAuth, token } = useCompanyAuth()
   const [campaign, setCampaign] = useState<ApiCampaign | null>(null)
   const [posts, setPosts] = useState<ApiPost[]>([])

@@ -2,16 +2,16 @@ import { formatEther } from 'viem'
 
 export function formatRaise(wei: string): string {
   const eth = formatEther(BigInt(wei))
-  return `${Number(eth).toLocaleString('vi-VN', { maximumFractionDigits: 2 })} ETH`
+  return `${Number(eth).toLocaleString(undefined, { maximumFractionDigits: 2 })} ETH`
 }
 
 export function formatTokens(wei: string): string {
   const val = Number(formatEther(BigInt(wei)))
-  return val.toLocaleString('vi-VN', { maximumFractionDigits: 2 })
+  return val.toLocaleString(undefined, { maximumFractionDigits: 2 })
 }
 
 export function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('vi-VN', {
+  return new Date(iso).toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'short',
     day: 'numeric',

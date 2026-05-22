@@ -61,7 +61,7 @@ function getTransportUrl() {
   )
 }
 
-const publicClient = createPublicClient({
+export const publicClient = createPublicClient({
   chain: PLATFORM_CHAIN_ID === HARDHAT_CHAIN_ID ? hardhatChain : sepoliaChain,
   transport: http(getTransportUrl()),
 })

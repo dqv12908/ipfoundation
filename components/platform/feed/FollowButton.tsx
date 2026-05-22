@@ -45,9 +45,9 @@ export function FollowButton({ company, follower, isFollowing, onToggle }: Follo
       {loading ? (
         <span className="inline-block h-3 w-3 rounded-full border border-current border-t-transparent" style={{ animation: 'spin 0.7s linear infinite' }} />
       ) : isFollowing ? (
-        'Đang theo dõi'
+        'Following'
       ) : (
-        'Theo dõi'
+        'Follow'
       )}
     </button>
   )

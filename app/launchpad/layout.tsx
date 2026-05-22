@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import { Be_Vietnam_Pro } from "next/font/google";
 import { Header } from "@/components/platform/layout/Header";
 import { AmbientBackground } from "@/components/platform/ui/AmbientBackground";
 import { Providers as PlatformProviders } from "@/lib/platform/providers";
 
-const beVietnamPro = Be_Vietnam_Pro({
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700", "800"],
-  variable: "--font-platform",
-  display: "swap",
-});
-
 export const metadata: Metadata = {
-  title: "IP Foundation Launchpad - Huy động vốn IP mã hóa",
+  title: "IP Launchpad - Tokenized Intellectual Property",
   description:
-    "Launchpad của IP Foundation dành cho sáng chế, tài sản trí tuệ khoa học và chiến dịch huy động vốn IP mã hóa.",
+    "The institutional-grade platform for tokenized IP fundraising on Ethereum",
 };
 
 export default function PlatformLayout({
@@ -23,7 +15,7 @@ export default function PlatformLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <section lang="vi" className={`platform-shell ${beVietnamPro.variable}`}>
+    <section lang="en" className="platform-shell">
       <PlatformProviders>
         <AmbientBackground />
         <div className="relative z-10">

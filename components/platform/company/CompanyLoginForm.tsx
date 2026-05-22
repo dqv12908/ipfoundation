@@ -17,7 +17,7 @@ export function CompanyLoginForm() {
     try {
       await login(companyId, password)
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Đăng nhập thất bại')
+      setError(err instanceof Error ? err.message : 'Login failed')
     } finally {
       setLoading(false)
     }
@@ -47,10 +47,10 @@ export function CompanyLoginForm() {
             className="mb-1 text-lg font-bold"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Cổng doanh nghiệp
+            Company Portal
           </h1>
           <p className="mb-6 text-sm text-text-secondary">
-            Đăng nhập bằng thông tin doanh nghiệp
+            Sign in with your company credentials
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-3">
@@ -61,7 +61,7 @@ export function CompanyLoginForm() {
                 setCompanyId(e.target.value)
                 setError('')
               }}
-              placeholder="Mã doanh nghiệp"
+              placeholder="Company ID"
               className="input-dark w-full"
               autoFocus
             />
@@ -72,7 +72,7 @@ export function CompanyLoginForm() {
                 setPassword(e.target.value)
                 setError('')
               }}
-              placeholder="Mật khẩu"
+              placeholder="Password"
               className="input-dark w-full"
             />
             {error && (
@@ -83,12 +83,12 @@ export function CompanyLoginForm() {
               disabled={loading || !companyId || !password}
               className="btn-primary w-full disabled:opacity-50"
             >
-              {loading ? 'Đang đăng nhập...' : 'Đăng nhập'}
+              {loading ? 'Signing in...' : 'Sign In'}
             </button>
           </form>
 
           <p className="mt-5 text-xs text-text-muted">
-            Liên hệ quản trị nền tảng để nhận thông tin đăng nhập doanh nghiệp.
+            Contact the platform admin to get your company credentials.
           </p>
         </div>
       </div>

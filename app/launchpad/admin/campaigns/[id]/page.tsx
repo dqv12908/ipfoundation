@@ -1,10 +1,9 @@
-﻿'use client'
+'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, use } from 'react'
 import Link from 'next/link'
 import { useWriteContract } from 'wagmi'
 import { campaignFactoryAbi } from '@/lib/platform/generated'
-import { PLATFORM_FACTORY_ADDRESS } from '@/lib/platform/config'
 import { StatusBadge } from '@/components/platform/shared/StatusBadge'
 import { ProgressBar } from '@/components/platform/shared/ProgressBar'
 import { TransactionButton } from '@/components/platform/shared/TransactionButton'
@@ -12,9 +11,10 @@ import { formatRaise, formatDate, shortAddress, campaignProgress } from '@/lib/p
 import type { ApiCampaign } from '@/lib/platform/api'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
+const FACTORY_ADDRESS = process.env.NEXT_PUBLIC_FACTORY_ADDRESS as `0x${string}` | undefined
 
-export default function AdminCampaignDetailPage({ params }: { params: { id: string } }) {
-  const { id } = params
+export default function AdminCampaignDetailPage({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = use(params)
   const [campaign, setCampaign] = useState<ApiCampaign | null>(null)
   const [loading, setLoading] = useState(true)
 
@@ -97,7 +97,7 @@ export default function AdminCampaignDetailPage({ params }: { params: { id: stri
         </div>
       )}
 
-      {isPending && (
+      {isPending && FACTORY_ADDRESS && (
         <div className="rounded-xl border border-caution/15 bg-caution/5 p-5">
           <p className="label-caps mb-1 text-caution">Pending Review</p>
           <p className="mb-4 text-sm text-text-secondary">
@@ -110,7 +110,7 @@ export default function AdminCampaignDetailPage({ params }: { params: { id: stri
                 isPending={approvePending}
                 onClick={() =>
                   writeApprove({
-                    address: PLATFORM_FACTORY_ADDRESS,
+                    address: FACTORY_ADDRESS,
                     abi: campaignFactoryAbi,
                     functionName: 'approveCampaign',
                     args: [BigInt(campaign.onChainId)],
@@ -127,7 +127,7 @@ export default function AdminCampaignDetailPage({ params }: { params: { id: stri
                 variant="danger"
                 onClick={() =>
                   writeReject({
-                    address: PLATFORM_FACTORY_ADDRESS,
+                    address: FACTORY_ADDRESS,
                     abi: campaignFactoryAbi,
                     functionName: 'rejectCampaign',
                     args: [BigInt(campaign.onChainId)],

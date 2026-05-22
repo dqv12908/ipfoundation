@@ -1,16 +1,14 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
 import { ConnectKitButton } from 'connectkit'
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
 const navLinks = [
-  { href: '/launchpad', label: 'Khám phá' },
-  { href: '/launchpad/feed', label: 'Bảng tin' },
-  { href: '/launchpad/dashboard', label: 'Danh mục' },
-  { href: '/launchpad/company', label: 'Doanh nghiệp' },
+  { href: '/launchpad', label: 'Explore' },
+  { href: '/launchpad/feed', label: 'Feed' },
+  { href: '/launchpad/dashboard', label: 'Portfolio' },
 ]
 
 export function Header() {
@@ -40,30 +38,24 @@ export function Header() {
     >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3 sm:px-8 lg:px-10">
         {/* Logo */}
-        <Link href="/" className="group flex items-center gap-3" aria-label="IP Foundation">
-          <Image
-            src="/images/whitetextnobg.png"
-            alt="IP Foundation"
-            width={150}
-            height={48}
-            priority
-            className="h-8 w-auto object-contain transition-opacity duration-200 group-hover:opacity-80"
-          />
+        <Link href="/launchpad" className="group flex items-center gap-2.5">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-accent text-xs font-bold tracking-tight text-surface transition-transform duration-200 group-hover:scale-105">
+            IP
+          </div>
           <span
-            className="hidden border-l border-white/15 pl-3 text-[0.6875rem] font-semibold uppercase text-text-secondary sm:block"
+            className="hidden text-[0.9375rem] font-semibold tracking-tight sm:block"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            Bệ phóng IP
+            Launchpad
           </span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 md:flex">
           {navLinks.map((link) => {
-            const isActive =
-              link.href === '/launchpad'
-                ? pathname === '/launchpad'
-                : pathname === link.href || pathname.startsWith(`${link.href}/`)
+            const isActive = link.href === '/launchpad'
+              ? pathname === '/launchpad'
+              : pathname === link.href || pathname.startsWith(`${link.href}/`)
             return (
               <Link
                 key={link.href}
@@ -83,7 +75,7 @@ export function Header() {
         {/* Right section */}
         <div className="flex items-center gap-3">
           <div className="hidden sm:block [&_button]:!rounded-lg [&_button]:!text-sm [&_button]:!font-medium">
-            <ConnectKitButton label="Kết nối ví" />
+            <ConnectKitButton />
           </div>
 
           {/* Mobile hamburger */}
@@ -121,10 +113,9 @@ export function Header() {
       >
         <nav className="flex flex-col gap-0.5 px-5 py-3">
           {navLinks.map((link) => {
-            const isActive =
-              link.href === '/launchpad'
-                ? pathname === '/launchpad'
-                : pathname === link.href || pathname.startsWith(`${link.href}/`)
+            const isActive = link.href === '/launchpad'
+              ? pathname === '/launchpad'
+              : pathname === link.href || pathname.startsWith(`${link.href}/`)
             return (
               <Link
                 key={link.href}
@@ -140,7 +131,7 @@ export function Header() {
             )
           })}
           <div className="pt-2">
-            <ConnectKitButton label="Kết nối ví" />
+            <ConnectKitButton />
           </div>
         </nav>
       </div>

@@ -2,10 +2,8 @@
 
 import { useState, useEffect, type ReactNode } from 'react'
 
-const PASSWORDS: Record<string, string> = {
-  admin: process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? 'admin123',
-  company: process.env.NEXT_PUBLIC_COMPANY_PASSWORD ?? 'company123',
-}
+const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
+const COMPANY_PASSWORD = process.env.NEXT_PUBLIC_COMPANY_PASSWORD ?? 'company123'
 
 export function PasswordGate({
   type,
@@ -17,8 +15,10 @@ export function PasswordGate({
   const [authenticated, setAuthenticated] = useState(false)
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [loading, setLoading] = useState(false)
 
   const storageKey = `ipplatform_${type}_auth`
+  const passwordStorageKey = `ipplatform_${type}_password`
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -27,15 +27,38 @@ export function PasswordGate({
     }
   }, [storageKey])
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (password === PASSWORDS[type]) {
+    setLoading(true)
+    setError(false)
+
+    if (type === 'admin') {
+      const res = await fetch(`${API_URL}/api/auth/admin`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password }),
+      }).catch(() => null)
+
+      if (res?.ok) {
+        sessionStorage.setItem(storageKey, 'true')
+        sessionStorage.setItem(passwordStorageKey, password)
+        setAuthenticated(true)
+        setPassword('')
+      } else {
+        setError(true)
+      }
+      setLoading(false)
+      return
+    }
+
+    if (password === COMPANY_PASSWORD) {
       sessionStorage.setItem(storageKey, 'true')
       setAuthenticated(true)
       setError(false)
     } else {
       setError(true)
     }
+    setLoading(false)
   }
 
   if (authenticated) return <>{children}</>
@@ -83,8 +106,8 @@ export function PasswordGate({
               )}
             </div>
 
-            <button type="submit" className="btn-primary w-full">
-              Unlock
+            <button type="submit" className="btn-primary w-full" disabled={loading}>
+              {loading ? 'Checking...' : 'Unlock'}
             </button>
           </form>
 

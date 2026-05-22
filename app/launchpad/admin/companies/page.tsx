@@ -27,9 +27,8 @@ export default function AdminCompaniesPage() {
 
   // Get admin password from sessionStorage (set by PasswordGate)
   function getAdminPassword(): string {
-    // The PasswordGate stores 'true' in sessionStorage, but we need the actual password.
-    // We read it from the env var that PasswordGate uses for validation.
-    return process.env.NEXT_PUBLIC_ADMIN_PASSWORD ?? 'admin123'
+    if (typeof window === 'undefined') return ''
+    return sessionStorage.getItem('ipplatform_admin_password') ?? ''
   }
 
   const fetchAccounts = useCallback(() => {

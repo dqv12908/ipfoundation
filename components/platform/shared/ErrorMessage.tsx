@@ -1,5 +1,5 @@
 export function ErrorMessage({
-  title = 'Có lỗi xảy ra',
+  title = 'Something went wrong',
   message,
   retry,
 }: {
@@ -13,7 +13,7 @@ export function ErrorMessage({
       {message && <p className="mt-1 text-sm text-negative/60">{message}</p>}
       {retry && (
         <button onClick={retry} className="btn-secondary mt-4 text-sm">
-          Thử lại
+          Try Again
         </button>
       )}
     </div>

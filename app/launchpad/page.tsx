@@ -9,12 +9,12 @@ import type { ApiCampaign, PaginatedResponse } from '@/lib/platform/api'
 const API_URL = process.env.NEXT_PUBLIC_API_URL ?? ''
 
 const filters = [
-  { value: '', label: 'Tất cả' },
-  { value: 'APPROVED', label: 'Sắp mở' },
-  { value: 'LIVE', label: 'Đang gọi vốn' },
-  { value: 'ENDED', label: 'Đã kết thúc' },
-  { value: 'FINALIZED_SUCCESS', label: 'Thành công' },
-  { value: 'FINALIZED_FAIL', label: 'Thất bại' },
+  { value: '', label: 'All' },
+  { value: 'APPROVED', label: 'Upcoming' },
+  { value: 'LIVE', label: 'Live' },
+  { value: 'ENDED', label: 'Ended' },
+  { value: 'FINALIZED_SUCCESS', label: 'Successful' },
+  { value: 'FINALIZED_FAIL', label: 'Failed' },
 ]
 
 export default function ExplorePage() {
@@ -29,7 +29,7 @@ export default function ExplorePage() {
     const params = status ? `?status=${status}` : ''
     fetch(`${API_URL}/api/campaigns${params}`)
       .then((r) => {
-        if (!r.ok) throw new Error(`API trả về mã ${r.status}`)
+        if (!r.ok) throw new Error(`API returned ${r.status}`)
         return r.json() as Promise<PaginatedResponse<ApiCampaign>>
       })
       .then((data) => setCampaigns(data.items))
@@ -41,99 +41,126 @@ export default function ExplorePage() {
     fetchCampaigns()
   }, [status]) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const liveCampaigns = campaigns.filter((campaign) => campaign.status === 'LIVE').length
-  const activeFilter = filters.find((filter) => filter.value === status)?.label ?? 'Tất cả'
-
   return (
-    <div className="space-y-10">
-      <section className="relative overflow-hidden border-b border-border pb-10 pt-8 animate-fade-in">
-        <div>
-          <p className="label-caps mb-4 tracking-widest text-accent">Huy động vốn IP mã hóa</p>
-          <h1
-            className="max-w-5xl text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl lg:leading-[1.05]"
-            style={{ fontFamily: 'var(--font-display)' }}
-          >
-            Đầu tư vào ý tưởng,{' '}
-            <span className="accent-text">trước khi thế giới nhận ra.</span>
-          </h1>
-          <p className="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-text-secondary">
-            Cam kết vốn vào các chiến dịch được bảo chứng bằng tài sản trí tuệ.
-          </p>
-        </div>
-      </section>
+    <div>
+      {/* Hero */}
+      <div className="mb-12 pt-10 animate-fade-in">
+        <p className="label-caps mb-3 tracking-widest text-accent">Tokenized IP Fundraising</p>
+        <h1
+          className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-[3.5rem] lg:leading-[1.1]"
+          style={{ fontFamily: 'var(--font-display)' }}
+        >
+          Invest in Ideas,<br />
+          <span className="accent-text">Before the World Does.</span>
+        </h1>
+        <p className="mt-4 max-w-xl text-[0.9375rem] leading-relaxed text-text-secondary">
+          Commit capital to IP-backed campaigns. Smart contract escrow.
+          Binary outcomes. Fully non-custodial.
+        </p>
 
-      <section className="grid gap-px overflow-hidden rounded-lg border border-border bg-border sm:grid-cols-2 animate-slide-up">
-        {[
-          { label: 'Tổng chiến dịch', value: campaigns.length.toString(), detail: activeFilter },
-          { label: 'Đang gọi vốn', value: liveCampaigns.toString(), detail: 'Cửa sổ cam kết mở' },
-        ].map((metric) => (
-          <div key={metric.label} className="bg-surface-2 px-5 py-4">
-            <p className="text-xs text-text-muted">{metric.label}</p>
+        {/* Stats row */}
+        <div className="mt-8 flex items-center gap-6">
+          <div>
             <p
-              className="mt-2 text-2xl font-bold tabular-nums text-text-primary"
+              className="text-2xl font-bold tabular-nums"
               style={{ fontFamily: 'var(--font-display)' }}
             >
-              {metric.value}
+              {campaigns.length}
             </p>
-            <p className="mt-1 text-xs text-text-muted">{metric.detail}</p>
+            <p className="text-xs text-text-muted">Campaigns</p>
           </div>
-        ))}
-      </section>
-
-      <section className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-        <div>
-          <p className="label-caps tracking-widest">Danh sách chiến dịch</p>
-          <p className="mt-1 text-sm text-text-secondary">
-            Lọc theo trạng thái để xem các chiến dịch IP đang mở hoặc đã quyết toán.
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-1.5 rounded-lg border border-border bg-white/[0.02] p-1.5">
-          {filters.map((f) => (
-            <button
-              key={f.value}
-              onClick={() => setStatus(f.value)}
-              className={`rounded-md px-3 py-1.5 text-[0.8125rem] font-medium transition-all duration-150 ${
-                status === f.value
-                  ? 'bg-accent text-white shadow-sm shadow-accent/20'
-                  : 'text-text-secondary hover:bg-white/[0.04] hover:text-text-primary'
-              }`}
+          <div className="h-6 w-px bg-border" />
+          <div>
+            <p
+              className="text-2xl font-bold text-accent"
+              style={{ fontFamily: 'var(--font-display)' }}
             >
-              {f.label}
-            </button>
+              100%
+            </p>
+            <p className="text-xs text-text-muted">On-Chain</p>
+          </div>
+          <div className="h-6 w-px bg-border" />
+          <div>
+            <p
+              className="text-2xl font-bold text-text-secondary"
+              style={{ fontFamily: 'var(--font-display)' }}
+            >
+              Sepolia
+            </p>
+            <p className="text-xs text-text-muted">Testnet</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Filter pills */}
+      <div className="mb-8 flex flex-wrap items-center gap-1.5 animate-slide-up stagger-2">
+        {filters.map((f) => (
+          <button
+            key={f.value}
+            onClick={() => setStatus(f.value)}
+            className={`rounded-md px-3 py-1.5 text-[0.8125rem] font-medium transition-all duration-150 ${
+              status === f.value
+                ? 'bg-accent/12 text-accent'
+                : 'text-text-secondary hover:text-text-primary hover:bg-white/[0.04]'
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Content */}
+      {error ? (
+        <ErrorMessage message={error} retry={fetchCampaigns} />
+      ) : loading ? (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {Array.from({ length: 6 }).map((_, i) => (
+            <CardSkeleton key={i} />
           ))}
         </div>
-      </section>
+      ) : campaigns.length === 0 ? (
+        <div className="flex flex-col items-center py-20 text-center animate-fade-in">
+          <svg className="mb-3 h-8 w-8 text-text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <p className="text-sm font-medium text-text-secondary">No campaigns found</p>
+          <p className="mt-1 text-xs text-text-muted">
+            {status ? 'Try a different filter' : 'Check back soon for new launches'}
+          </p>
+        </div>
+      ) : (
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {campaigns.map((c, i) => (
+            <CampaignCard key={c.onChainId} campaign={c} index={i} />
+          ))}
+        </div>
+      )}
 
-      <section>
-        {error ? (
-          <ErrorMessage message={error} retry={fetchCampaigns} />
-        ) : loading ? (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {Array.from({ length: 6 }).map((_, i) => (
-              <CardSkeleton key={i} />
-            ))}
-          </div>
-        ) : campaigns.length === 0 ? (
-          <div className="panel flex flex-col items-center px-6 py-16 text-center animate-fade-in">
-            <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg border border-accent/20 bg-accent/10">
-              <svg className="h-6 w-6 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-              </svg>
+      {/* How it works */}
+      <div className="mt-20 animate-slide-up">
+        <p className="label-caps mb-6 tracking-widest">The Protocol</p>
+        <div className="grid gap-5 sm:grid-cols-3">
+          {[
+            { num: '01', title: 'Create', desc: 'Companies submit IP-backed campaigns with clear fundraising parameters and timeline.' },
+            { num: '02', title: 'Fund', desc: 'Commit ETH during the live window. All capital secured by smart contract escrow.' },
+            { num: '03', title: 'Settle', desc: 'Min raise met — tokens distributed. Not met — full refund. Binary outcome, no ambiguity.' },
+          ].map((step, i) => (
+            <div
+              key={step.num}
+              className={`panel p-6 animate-slide-up stagger-${i + 1}`}
+            >
+              <span className="text-xs font-semibold text-accent tabular-nums">{step.num}</span>
+              <h3
+                className="mt-2 text-base font-bold"
+                style={{ fontFamily: 'var(--font-display)' }}
+              >
+                {step.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-text-secondary">{step.desc}</p>
             </div>
-            <p className="text-sm font-semibold text-text-primary">Chưa có chiến dịch phù hợp</p>
-            <p className="mt-2 max-w-sm text-sm text-text-muted">
-              {status ? 'Thử một bộ lọc khác để mở rộng danh sách.' : 'Các chiến dịch IP mới sẽ xuất hiện tại đây sau khi được phê duyệt.'}
-            </p>
-          </div>
-        ) : (
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {campaigns.map((c, i) => (
-              <CampaignCard key={c.onChainId} campaign={c} index={i} />
-            ))}
-          </div>
-        )}
-      </section>
-
+          ))}
+        </div>
+      </div>
     </div>
   )
 }

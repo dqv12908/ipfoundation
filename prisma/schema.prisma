@@ -1,0 +1,96 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Campaign {
+  id              Int      @id @default(autoincrement())
+  onChainId       Int      @unique
+  contractAddress String   @unique
+  company         String
+  name            String
+  symbol          String
+  metadataURI     String?
+  description     String?
+  imageUrl        String?
+  minRaise        String
+  maxRaise        String
+  tokenPrice      String
+  startTime       DateTime
+  endTime         DateTime
+  acceptedAsset   String
+  status          String   @default("CREATED")
+  totalCommitted  String   @default("0")
+  finalized       Boolean  @default(false)
+  successful      Boolean?
+  tokenAddress    String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  commitments Commitment[]
+  posts       Post[]
+
+  @@index([company])
+  @@index([status])
+}
+
+model Commitment {
+  id          Int      @id @default(autoincrement())
+  campaignId  Int
+  campaign    Campaign @relation(fields: [campaignId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  investor    String
+  amount      String
+  blockNumber Int
+  txHash      String   @unique
+  claimed     Boolean  @default(false)
+  refunded    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  @@index([investor])
+  @@index([campaignId])
+}
+
+model Post {
+  id         Int      @id @default(autoincrement())
+  campaignId Int
+  campaign   Campaign @relation(fields: [campaignId], references: [id], onDelete: Restrict, onUpdate: Cascade)
+  company    String
+  content    String
+  createdAt  DateTime @default(now())
+
+  @@index([campaignId])
+  @@index([company])
+  @@index([createdAt])
+}
+
+model Follow {
+  id        Int      @id @default(autoincrement())
+  follower  String
+  company   String
+  createdAt DateTime @default(now())
+
+  @@unique([follower, company])
+  @@index([follower])
+  @@index([company])
+}
+
+model CompanyAccount {
+  id            Int      @id @default(autoincrement())
+  companyId     String   @unique
+  name          String
+  passwordHash  String
+  walletAddress String   @unique
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  @@index([walletAddress])
+}
+
+model IndexerState {
+  id              Int @id @default(1)
+  lastSyncedBlock Int @default(0)
+}

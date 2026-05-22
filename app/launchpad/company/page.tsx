@@ -1,4 +1,4 @@
-﻿'use client'
+'use client'
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
@@ -38,19 +38,19 @@ export default function CompanyPage() {
             className="text-xl font-bold"
             style={{ fontFamily: 'var(--font-display)' }}
           >
-            {company?.name ?? 'Cổng doanh nghiệp'}
+            {company?.name ?? 'Company Portal'}
           </h1>
           <p className="mt-0.5 text-xs text-text-muted">
-            Đăng nhập với mã{' '}
+            Signed in as{' '}
             <span className="text-accent">{company?.companyId}</span>
           </p>
         </div>
         <div className="flex items-center gap-3">
           <Link href="/launchpad/company/campaigns/new" className="btn-primary text-sm">
-            Tạo chiến dịch
+            Create Campaign
           </Link>
           <button onClick={logout} className="btn-secondary text-sm">
-            Đăng xuất
+            Sign Out
           </button>
         </div>
       </div>
@@ -78,13 +78,13 @@ export default function CompanyPage() {
             />
           </svg>
           <p className="text-sm text-text-secondary">
-            Chưa có chiến dịch nào.
+            No campaigns created yet.
           </p>
           <Link
             href="/launchpad/company/campaigns/new"
             className="btn-primary mt-4 inline-block text-sm"
           >
-            Tạo chiến dịch đầu tiên
+            Create your first campaign
           </Link>
         </div>
       ) : (

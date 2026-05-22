@@ -46,14 +46,14 @@ export function TransactionButton({
             />
           </span>
         )}
-        {isPending ? 'Xác nhận trong ví...' : isConfirming ? 'Đang xác nhận...' : children}
+        {isPending ? 'Confirm in wallet...' : isConfirming ? 'Confirming...' : children}
       </button>
       {isSuccess && (
         <div className="mt-2 flex items-center gap-1.5 text-sm text-positive animate-fade-in">
           <svg className="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
           </svg>
-          Giao dịch đã xác nhận
+          Transaction confirmed
         </div>
       )}
     </div>

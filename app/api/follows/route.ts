@@ -1,30 +1,95 @@
 import { NextResponse } from 'next/server'
-import type { ApiFollow } from '@/lib/platform/api'
-import { getPagination, paginate } from '@/lib/platform/onchain-api'
+import { getPrisma, isDatabaseConfigured } from '@/lib/platform/db'
+import {
+  normalizeWallet,
+} from '@/lib/platform/server-store'
 
 export const dynamic = 'force-dynamic'
+export const runtime = 'nodejs'
 
 export async function GET(request: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: 'Database is not configured' },
+      { status: 503 },
+    )
+  }
+
   const url = new URL(request.url)
-  const { page, limit } = getPagination(url.searchParams)
-  return NextResponse.json(paginate<ApiFollow>([], page, limit))
+  const follower = url.searchParams.get('follower')
+
+  if (!follower) {
+    return NextResponse.json(
+      { error: 'follower query param required' },
+      { status: 400 },
+    )
+  }
+
+  const normalizedFollower = normalizeWallet(follower)
+  const prisma = getPrisma()
+  const items = await prisma.follow.findMany({
+    where: { follower: normalizedFollower },
+    orderBy: { createdAt: 'desc' },
+  })
+
+  return NextResponse.json({ items })
 }
 
 export async function POST(request: Request) {
-  const body = await request.json().catch(() => null)
-
-  if (!body?.follower || !body?.company) {
-    return NextResponse.json({ error: 'Invalid follow payload' }, { status: 400 })
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: 'Database is not configured' },
+      { status: 503 },
+    )
   }
 
-  return NextResponse.json({
-    id: Date.now(),
-    follower: String(body.follower),
-    company: String(body.company),
-    createdAt: new Date().toISOString(),
+  const body = await request.json().catch(() => null)
+  const follower = normalizeWallet(String(body?.follower ?? ''))
+  const company = normalizeWallet(String(body?.company ?? ''))
+
+  if (!follower || !company) {
+    return NextResponse.json(
+      { error: 'follower and company are required' },
+      { status: 400 },
+    )
+  }
+
+  const prisma = getPrisma()
+  const follow = await prisma.follow.upsert({
+    where: { follower_company: { follower, company } },
+    create: {
+      follower,
+      company,
+    },
+    update: {},
   })
+
+  return NextResponse.json(follow, { status: 201 })
 }
 
-export async function DELETE() {
-  return NextResponse.json({ ok: true })
+export async function DELETE(request: Request) {
+  if (!isDatabaseConfigured()) {
+    return NextResponse.json(
+      { error: 'Database is not configured' },
+      { status: 503 },
+    )
+  }
+
+  const body = await request.json().catch(() => null)
+  const follower = normalizeWallet(String(body?.follower ?? ''))
+  const company = normalizeWallet(String(body?.company ?? ''))
+
+  if (!follower || !company) {
+    return NextResponse.json(
+      { error: 'follower and company are required' },
+      { status: 400 },
+    )
+  }
+
+  const prisma = getPrisma()
+  await prisma.follow.deleteMany({
+    where: { follower, company },
+  })
+
+  return NextResponse.json({ success: true })
 }

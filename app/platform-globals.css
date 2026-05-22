@@ -14,8 +14,8 @@
   --color-text-primary: #ffffff;
   --color-text-secondary: #a1a1aa;
   --color-text-muted: #71717a;
-  --font-display: var(--font-platform), "Be Vietnam Pro", system-ui, sans-serif;
-  --font-body: var(--font-platform), "Be Vietnam Pro", system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
+  --font-body: var(--font-inter), "Inter", system-ui, sans-serif;
   --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
   --ease-out: cubic-bezier(0, 0, 0.2, 1);
 
@@ -69,6 +69,15 @@
   }
   100% {
     background-position: 200% 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -226,6 +235,16 @@
   background: rgba(255, 255, 255, 0.032);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
+}
+
+@keyframes border-pulse {
+  0%,
+  100% {
+    border-color: rgba(37, 99, 235, 0.12);
+  }
+  50% {
+    border-color: rgba(37, 99, 235, 0.3);
+  }
 }
 
 .panel-elevated {
@@ -447,11 +466,29 @@
   font-weight: 600;
 }
 
+.prose-editor em {
+  font-style: italic;
+}
+
+.prose-editor u {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose-editor s {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+
 .prose-editor a {
   color: var(--color-accent);
   cursor: pointer;
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.prose-editor a:hover {
+  opacity: 0.8;
 }
 
 .prose-editor ul,

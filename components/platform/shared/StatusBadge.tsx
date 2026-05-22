@@ -1,11 +1,11 @@
 const statusConfig: Record<string, { label: string; color: string; dotColor: string; pulse?: boolean }> = {
-  CREATED: { label: 'Chờ duyệt', color: 'text-caution bg-caution/8 border-caution/15', dotColor: 'bg-caution' },
-  APPROVED: { label: 'Sắp mở', color: 'text-info bg-info/8 border-info/15', dotColor: 'bg-info' },
-  REJECTED: { label: 'Từ chối', color: 'text-negative bg-negative/8 border-negative/15', dotColor: 'bg-negative' },
-  LIVE: { label: 'Đang gọi vốn', color: 'text-positive bg-positive/8 border-positive/15', dotColor: 'bg-positive', pulse: true },
-  ENDED: { label: 'Đã kết thúc', color: 'text-text-muted bg-white/[0.03] border-white/[0.06]', dotColor: 'bg-text-muted' },
-  FINALIZED_SUCCESS: { label: 'Thành công', color: 'text-positive bg-positive/8 border-positive/15', dotColor: 'bg-positive' },
-  FINALIZED_FAIL: { label: 'Thất bại', color: 'text-negative bg-negative/8 border-negative/15', dotColor: 'bg-negative' },
+  CREATED: { label: 'Pending', color: 'text-caution bg-caution/8 border-caution/15', dotColor: 'bg-caution' },
+  APPROVED: { label: 'Upcoming', color: 'text-info bg-info/8 border-info/15', dotColor: 'bg-info' },
+  REJECTED: { label: 'Rejected', color: 'text-negative bg-negative/8 border-negative/15', dotColor: 'bg-negative' },
+  LIVE: { label: 'Live', color: 'text-positive bg-positive/8 border-positive/15', dotColor: 'bg-positive', pulse: true },
+  ENDED: { label: 'Ended', color: 'text-text-muted bg-white/[0.03] border-white/[0.06]', dotColor: 'bg-text-muted' },
+  FINALIZED_SUCCESS: { label: 'Successful', color: 'text-positive bg-positive/8 border-positive/15', dotColor: 'bg-positive' },
+  FINALIZED_FAIL: { label: 'Failed', color: 'text-negative bg-negative/8 border-negative/15', dotColor: 'bg-negative' },
 }
 
 export function StatusBadge({ status }: { status: string }) {
